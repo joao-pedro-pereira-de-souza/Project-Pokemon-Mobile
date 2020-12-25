@@ -1,10 +1,108 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { View  , Text , Image , TouchableOpacity} from 'react-native';
+
 import styles from './Styles';
+import {stylesFonts , COLORS , WidthScreen , LOGO, HeightScreen} from '../../Styles';
+
+import Input from '../../components/inputText/Index';
+import Button from '../../components/button/Index';
+import ButtonClcle from '../../components/buttonCicleIcon/Index';
+
+import { EvilIcons  , FontAwesome , MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function signIn() {
+
+  const [email , setEmail] = useState('');
+  const [senha , setSenha] = useState('');
+
  return (
    <View style={styles.container}>
+
+     <View style={styles.contentSignUp}>
+
+       <Text style={[stylesFonts.label ,{ width:'70%' , color: COLORS.Coloryellow , textAlign:'center' }]}>
+         Mais de 300mil cadastros na plataforma
+       </Text>
+
+       <TouchableOpacity style={styles.buttonSignUp}>
+
+         <Text style={[stylesFonts.labelDescBold , {color:COLORS.Coloryellow}]}>Cadastrar</Text>
+
+       </TouchableOpacity>
+
+     </View>
+
+     <Text style={[stylesFonts.titleItalic ,{ color: COLORS.Coloryellow , marginTop:20 , marginLeft:WidthScreen * 0.10}]}>Login</Text>
+
+      <View style={styles.contentLogin}>
+
+       <View style={{marginBottom:10}}>
+
+            <Input
+            bg={COLORS.ColorBlue}
+            place='Email'
+            value={email}
+            onChange={(text) => setEmail(text)}
+            
+            />
+
+       </View>
+
+       <View style={{marginBottom:10}}>
+
+            <Input
+            bg={COLORS.ColorBlue}
+            place='Senha'
+            value={senha}
+            onChange={(text) => setSenha(text)}
+            boolPassword={true}
+
+            />
+
+        </View>
+
+        <Button text='Logar'/>
+     
+     </View>
+
+    
+     <View style={styles.footer}>
+
+       <Image  source={LOGO} style={styles.imgFooter} resizeMode='contain'/>
+
+       <View style={styles.contentFooter}>
+
+         <View style={styles.contentFooterInfo}>
+
+          <Text style={[ stylesFonts.label  ,{ color:'#fff'}]}>Siga as Redes </Text>
+           <View style={styles.contentFooterListButton}>
+
+                <View style={{marginRight:5}}>
+
+                  <ButtonClcle Icon={EvilIcons} nameIcon='sc-facebook'/>
+
+                </View>
+
+                <View style={{marginRight:5}}>
+
+                  <ButtonClcle Icon={FontAwesome} nameIcon='instagram'/>
+
+                </View>
+
+                <View style={{marginRight:5}}>
+
+                    <ButtonClcle Icon={MaterialCommunityIcons} nameIcon='web'/>
+
+                </View>
+
+            </View>           
+
+         </View>
+
+       </View>
+        
+       
+     </View>
 
    </View>
   );

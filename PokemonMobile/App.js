@@ -11,7 +11,7 @@ import {useFonts , BalsamiqSans_400Regular , BalsamiqSans_700Bold , BalsamiqSans
 import Routes from './src/routes/Routes'
 export default function App() {
 
-  const FontsLoading = useFonts({
+  const [FontsLoading] = useFonts({
     BalsamiqSans_400Regular,
     BalsamiqSans_700Bold,
     BalsamiqSans_700Bold_Italic
