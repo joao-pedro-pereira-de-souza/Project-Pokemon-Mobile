@@ -6,7 +6,9 @@ import {COLORS , stylesFonts} from '../../Styles';
 const button = (props) => {
   return (
   
-    <TouchableOpacity style={[styles.container , {backgroundColor: props.bg || COLORS.Coloryellow}]}>
+    <TouchableOpacity 
+    style={[styles.container , {backgroundColor: props.bg || COLORS.Coloryellow}]} 
+    onPress={props.onPress()}>
 
         <Text style={[stylesFonts.labelBold , { color: props.color || '#fff'}]}>{props.text}</Text>
 

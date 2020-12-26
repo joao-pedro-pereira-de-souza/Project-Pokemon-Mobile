@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View  , Text , Image , TouchableOpacity} from 'react-native';
-
+import {useNavigation} from '@react-navigation/native'
 import styles from './Styles';
 import {stylesFonts , COLORS , WidthScreen , LOGO, HeightScreen} from '../../Styles';
 
@@ -10,12 +10,34 @@ import ButtonClcle from '../../components/buttonCicleIcon/Index';
 
 import { EvilIcons  , FontAwesome , MaterialCommunityIcons } from '@expo/vector-icons';
 
+
+import Requisitions from '../../services/User/requisitions';
+
 export default function signIn() {
 
   const [email , setEmail] = useState('');
   const [senha , setSenha] = useState('');
 
+  const Navigation = useNavigation();
+
+ async function RequestionSignIn(){
+
+      if(await Requisitions.SignIn(email , senha)){
+
+        console.log('Login')
+        
+      }
+      else{
+
+        console.log('Erro')
+
+      }
+  
+  }
+
  return (
+
+  
    <View style={styles.container}>
 
      <View style={styles.contentSignUp}>
@@ -24,7 +46,7 @@ export default function signIn() {
          Mais de 300mil cadastros na plataforma
        </Text>
 
-       <TouchableOpacity style={styles.buttonSignUp}>
+       <TouchableOpacity style={styles.buttonSignUp} onPress={() => Navigation.navigate('SignUp')}>
 
          <Text style={[stylesFonts.labelDescBold , {color:COLORS.Coloryellow}]}>Cadastrar</Text>
 
@@ -61,7 +83,7 @@ export default function signIn() {
 
         </View>
 
-        <Button text='Logar'/>
+        <Button text='Logar' onPress={() => RequestionSignIn}/>
      
      </View>
 
@@ -75,6 +97,7 @@ export default function signIn() {
          <View style={styles.contentFooterInfo}>
 
           <Text style={[ stylesFonts.label  ,{ color:'#fff'}]}>Siga as Redes </Text>
+
            <View style={styles.contentFooterListButton}>
 
                 <View style={{marginRight:5}}>
@@ -101,7 +124,6 @@ export default function signIn() {
 
        </View>
         
-       
      </View>
 
    </View>
