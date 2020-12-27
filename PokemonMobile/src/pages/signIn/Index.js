@@ -11,7 +11,6 @@ import Notification from '../../components/NotificationsModel/Index'
 
 import { EvilIcons  , FontAwesome , MaterialCommunityIcons } from '@expo/vector-icons';
 
-
 import Requisitions from '../../services/User/requisitions';
 
 export default function signIn() {
@@ -20,7 +19,8 @@ export default function signIn() {
   const [senha , setSenha] = useState('');
 
   const [notification , setNotification ] = useState(false);
-
+  const [status , setStatus] = useState(false);
+  const [textNotification , setTextNotification ] = useState('');
 
   const Navigation = useNavigation();
 
@@ -29,11 +29,15 @@ export default function signIn() {
       if(await Requisitions.SignIn(email , senha)){
 
        setNotification(true)
+       setStatus(true)
+       setTextNotification('Login efetuado com sucesso')
         
       }
       else{
 
-        console.log('Erro')
+        setNotification(true)
+        setStatus(false)
+        setTextNotification('Erro no login')
 
       }
   
@@ -133,12 +137,12 @@ export default function signIn() {
      <Notification
 
         img={require('../../assets/IconOk.png')}
-        text='Login Correto'
+        text={textNotification}
         visible={notification}
         getNotification={setNotification}
+        Status={status}
+        
         />
-
-    
 
    </View>
   );

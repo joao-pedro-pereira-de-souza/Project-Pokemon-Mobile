@@ -29,6 +29,16 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
 
+    },
+    labelDescConf:{
+
+        alignSelf:'center' , 
+        width:'80%', 
+        textAlign:'center' , 
+        color:'#fff' , 
+        marginTop: -20 , 
+        maxHeight:HeightScreen * 0.17
+
     }
 });
 

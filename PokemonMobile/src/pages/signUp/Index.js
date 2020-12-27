@@ -3,23 +3,83 @@ import {useNavigation} from '@react-navigation/native'
 import { View , Text , Image ,SafeAreaView , TouchableOpacity} from 'react-native';
 import styles from './Styles';
 import {COLORS , stylesFonts , LOGO} from '../../Styles';
-import * as Animatable from 'react-native-animatable';
 
 import { EvilIcons  , FontAwesome , MaterialCommunityIcons , Ionicons} from '@expo/vector-icons';
 
 import Input from '../../components/inputText/Index';
 import Button from '../../components/button/Index';
 import ButtonClcle from '../../components/buttonCicleIcon/Index';
+import Notification from '../../components/NotificationsModel/Index';
+
+import Requestions from '../../services/User/requisitions'
+import RequestionsSystem from '../../services/Requestions'
 
 export default function signUp() {
-
 
   const [name , setName] = useState('');
   const [email , setEmail] = useState('');
   const [senha , setSenha] = useState('');
   const [ConfSenha , setConfSenha] = useState('');
 
+  const [notification , setNotification ] = useState(false);
+  const [status , setStatus] = useState(false);
+  const [textNotification , setTextNotification ] = useState('');
+
   const Navigation = useNavigation();
+
+  async function SignUpPOST (){
+
+    if(!RequestionsSystem.TextNull([name , email , senha , ConfSenha]))
+    {
+
+      if(senha == ConfSenha)
+      {
+
+          let ArraySignUp = { name:name , email: email , senha: senha}
+
+          await Requestions.SignUp(ArraySignUp).then
+          ( 
+
+              () => 
+              {
+
+                setNotification(true)
+                setStatus(true)
+                setTextNotification('Login efetuado com sucesso')
+              
+              },
+
+              ()=>{
+
+                setNotification(true)
+                setStatus(false)
+                setTextNotification('Ocorreu um erro no cadastro \n tente novamente')
+
+              }
+            
+            )
+      }
+      else
+      {
+
+        setNotification(true)
+        setStatus(false)
+        setTextNotification('A senha tem que ser igual no Confirmar senha \n tente novamente')
+
+      }
+      
+     
+    }
+    else
+    {
+
+      setNotification(true)
+      setStatus(false)
+      setTextNotification('Digite todos os campos \n tente novamente')
+
+    }
+
+  }
 
  return (
    <View style={styles.container}>
@@ -48,57 +108,57 @@ export default function signUp() {
 
      </View>
 
-        <View style={{width:'90%' , alignSelf:'center' , marginTop:20}}>
+      <View style={{width:'90%' , alignSelf:'center' , marginTop:20}}>
 
-        <View style={{marginBottom:10}}>
+            <View style={{marginBottom:10}}>
 
-          <Input
-            bg={COLORS.ColorBlue}
-            place='Name'
-            value={name}
-            onChange={(text) => setName(text)}
-            
-            />
+              <Input
+                bg={COLORS.ColorBlue}
+                place='Name'
+                value={name}
+                onChange={(text) => setName(text)}
+                
+                />
 
-        </View>
+            </View>
 
-        <View style={{marginBottom:10}}>
+            <View style={{marginBottom:10}}>
 
-          <Input
-            bg={COLORS.ColorBlue}
-            place='Email'
-            value={email}
-            onChange={(text) => setEmail(text)}
-            
-            />
+              <Input
+                bg={COLORS.ColorBlue}
+                place='Email'
+                value={email}
+                onChange={(text) => setEmail(text)}
+                
+                />
 
-        </View>
+            </View>
 
-        <View style={{marginBottom:10}}>
+            <View style={{marginBottom:10}}>
 
-          <Input
-            bg={COLORS.ColorBlue}
-            place='Senha'
-            value={senha}
-            onChange={(text) => setSenha(text)}
-            
-            />
+              <Input
+                bg={COLORS.ColorBlue}
+                place='Senha'
+                value={senha}
+                onChange={(text) => setSenha(text)}
+                boolPassword={true}
+                />
 
-        </View>
+            </View>
 
-        <View style={{marginBottom:10}}>
+            <View style={{marginBottom:10}}>
 
-            <Input
-              bg={COLORS.ColorBlue}
-              place='Recuperar Senha'
-              value={ConfSenha}
-              onChange={(text) => setConfSenha(text)}
-              
-              />
+                <Input
+                  bg={COLORS.ColorBlue}
+                  place='Recuperar Senha'
+                  value={ConfSenha}
+                  onChange={(text) => setConfSenha(text)}
+                  boolPassword={true}
+                  />
 
-        </View>
+            </View>
 
-        <Button text='Cadastrar'/>
+        <Button text='Cadastrar' onPress={() => SignUpPOST}/>
       
       </View>
 
@@ -138,7 +198,17 @@ export default function signUp() {
 
             </View>
             
-            </View>
+      </View>
+
+      <Notification
+
+        img={require('../../assets/IconOk.png')}
+        text={textNotification}
+        visible={notification}
+        getNotification={setNotification}
+        Status={status}
+        
+        />
 
 
    </View>

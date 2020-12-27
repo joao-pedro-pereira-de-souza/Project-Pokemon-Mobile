@@ -3,7 +3,11 @@ import {Image , Text , TouchableOpacity} from 'react-native';
 import { View } from 'react-native-animatable';
 import Modal from 'react-native-modal';
 import styles from './Styles';
-import {stylesFonts , COLORS} from '../../Styles'
+import {stylesFonts , COLORS , HeightScreen} from '../../Styles';
+
+import ImgErro from '../../assets/IconErro.png';
+import ImgOk from '../../assets/IconOk.png';
+
 const NotificationsModel = (props) => {
 
     const DesativeNoti = () =>{
@@ -18,9 +22,9 @@ const NotificationsModel = (props) => {
 
          <View style={styles.container}>
 
-         <Image source={props.img} style={{width:'50%' , height:'50%', alignSelf:'center' , marginTop:30}} resizeMode='contain' />
+         <Image source={props.Status ? ImgOk : ImgErro} style={{width:'50%' , height:'50%', alignSelf:'center' , marginTop:30}} resizeMode='contain' />
 
-            <Text style={[ stylesFonts.labelBold ,{alignSelf:'center' , width:'80%', textAlign:'center' , color:'#fff'}]}>
+            <Text style={[ stylesFonts.labelDescBold , styles.labelDescConf]}>
                 {props.text}
             </Text>
 
@@ -32,9 +36,6 @@ const NotificationsModel = (props) => {
 
          </View>
         
-       
-      
-
      </Modal>
   
   

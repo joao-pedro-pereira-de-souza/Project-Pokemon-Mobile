@@ -1,5 +1,4 @@
-import { GetUsers }from './Api'
-
+import { GetUsers , PostSignUp}from './Api'
 
 
 export default {
@@ -42,5 +41,25 @@ export default {
         })
 
 
+    },
+
+    SignUp : async (Array)=>
+    {
+
+        return new Promise((res , req) =>{
+
+            PostSignUp(Array).then(response =>{
+
+                res(response)
+
+            }).catch(err =>{
+                req(err)
+            })
+
+           
+
+        })
+
     }
+
 }

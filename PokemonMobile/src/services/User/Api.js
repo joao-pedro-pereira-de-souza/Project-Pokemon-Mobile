@@ -17,3 +17,44 @@ export const GetUsers = () =>{
     })
 
 }
+
+export const PostSignUp = (JsonItens) =>{
+
+    return new Promise((res , req) => {
+
+        let body = {
+
+            página1:{
+    
+              ...JsonItens
+    
+            }
+    
+        }
+
+        fetch(url, {
+    
+            method:'POST',
+            headers:{
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+    
+        })
+        .then((response)=> response.json())
+        .then(response => {
+
+            res(response.página1)
+    
+        }).catch(err =>{
+
+            req(err)
+    
+        })
+
+    })
+   
+
+
+}
