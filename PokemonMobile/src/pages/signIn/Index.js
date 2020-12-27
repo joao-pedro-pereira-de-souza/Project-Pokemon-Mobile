@@ -7,6 +7,7 @@ import {stylesFonts , COLORS , WidthScreen , LOGO, HeightScreen} from '../../Sty
 import Input from '../../components/inputText/Index';
 import Button from '../../components/button/Index';
 import ButtonClcle from '../../components/buttonCicleIcon/Index';
+import Notification from '../../components/NotificationsModel/Index'
 
 import { EvilIcons  , FontAwesome , MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -18,13 +19,16 @@ export default function signIn() {
   const [email , setEmail] = useState('');
   const [senha , setSenha] = useState('');
 
+  const [notification , setNotification ] = useState(false);
+
+
   const Navigation = useNavigation();
 
  async function RequestionSignIn(){
 
       if(await Requisitions.SignIn(email , senha)){
 
-        console.log('Login')
+       setNotification(true)
         
       }
       else{
@@ -125,6 +129,16 @@ export default function signIn() {
        </View>
         
      </View>
+
+     <Notification
+
+        img={require('../../assets/IconOk.png')}
+        text='Login Correto'
+        visible={notification}
+        getNotification={setNotification}
+        />
+
+    
 
    </View>
   );
