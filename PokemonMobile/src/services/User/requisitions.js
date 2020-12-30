@@ -56,8 +56,6 @@ export default {
                 req(err)
             })
 
-           
-
         })
 
     }
