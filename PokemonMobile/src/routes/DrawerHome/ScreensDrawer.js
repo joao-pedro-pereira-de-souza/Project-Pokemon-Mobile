@@ -3,6 +3,7 @@ import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack';
 import Animated from 'react-native-reanimated';
 import HomeScreen from '../../pages/home/Index';
+import { COLORS } from '../../Styles';
 
 const Stack = createStackNavigator()
 
@@ -24,7 +25,7 @@ const routes = ({style}) => {
                 },
                 shadowOpacity: 0.50,
                 shadowRadius: 12.35,
-            
+                borderColor: COLORS.Coloryellow,
                 elevation: 19,     
          
              } , style]}

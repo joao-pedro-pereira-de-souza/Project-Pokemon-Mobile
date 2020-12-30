@@ -19,6 +19,13 @@ const drawer = () => {
         outputRange:[1,0.8]
   
     }) 
+
+    const scaleBorder = Animated.interpolate(progres,{
+  
+        inputRange:[0 , 0],
+        outputRange:[0,1]
+  
+    }) 
   
     const borderRadius =  Animated.interpolate(progres,{
   
@@ -27,7 +34,7 @@ const drawer = () => {
   
     }) 
   
-    const screensStyles =  { borderRadius, transform: [ {scale} ] };
+    const screensStyles =  { borderRadius, transform: [ {scale} ] , borderWidth : scaleBorder };
 
     //#endregion
 
@@ -36,7 +43,7 @@ const drawer = () => {
         <Drawer.Navigator 
         drawerType='slide'
         overlayColor='Transparent'
-        drawerStyle={{width:"50%"}}
+        drawerStyle={{width:"60%"}}
         contentContainerStyle={{flex:1}}
 
         drawerContentOptions={{
