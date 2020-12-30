@@ -1,12 +1,13 @@
 import React from 'react'
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {View , Image , Text} from 'react-native'
+import {COLORS} from '../../../Styles'
 
-const drawerContent = () =>{
+const drawerContent = (props) =>{
 
     return(
 
-        <DrawerContentScrollView>
+        <DrawerContentScrollView {...props} style={{flex:1 , backgroundColor: COLORS.Background}}>
 
             <View>
 
