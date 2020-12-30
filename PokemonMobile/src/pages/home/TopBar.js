@@ -4,7 +4,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Api from '../../services/Pokemon/Api';
 import Loading from 'expo-app-loading';
-import {COLORS , WidthScreen , stylesFonts} from '../../Styles'
+import {COLORS , WidthScreen , stylesFonts} from '../../Styles';
+
+import CardRectangle from '../../components/cardRectangle/Index'
+import cardRectangle from '../../components/cardRectangle/Index';
 
 const Stack = createStackNavigator();
 
@@ -63,13 +66,18 @@ const ListeTodos = () =>{
     const RederItem = (item , index) =>
     {
 
-        const { name , uri } = item.item
+        const { name , url } = item.item
+
+        const urlNumber = url.replace('https://pokeapi.co/api/v2/pokemon/' , '').replace('/' , '')
+        // adicionando o id do pokemon na uri funcional
+        const newUrl = 'https://pokeres.bastionbot.org/images/pokemon/'+ urlNumber + '.png'
+        
 
         return(
 
-            <View style={{marginRight:6}}>
+            <View style={{margin: 5}}>
 
-                <Text>{name}</Text>
+                <CardRectangle name={name} img={newUrl}/>
 
             </View>
 
@@ -138,10 +146,10 @@ const ListeTodos = () =>{
 
             </View>
 
-            <View style={{marginTop:10 , alignItems:'center'}}>
+            <View style={{alignItems:'center'}}>
 
                 <FlatList
-                
+                showsVerticalScrollIndicator={false}
                 data={data}
                 renderItem={RederItem}
                 keyExtractor={(item , index) => String(index)}
