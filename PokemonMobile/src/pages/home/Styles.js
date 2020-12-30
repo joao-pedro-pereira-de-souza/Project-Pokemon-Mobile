@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     contentTitle:{
         flexDirection:'row',
         marginTop:HeightScreen * 0.002,
-        alignItems:'center'
+        alignItems:'center',
+        paddingVertical:10,
         
     },
     contentSearch:{
@@ -25,7 +26,10 @@ const styles = StyleSheet.create({
 
     },
     contentOrdem:{
-        flexDirection:'row'
+        marginTop:10,
+        flexDirection:'row', 
+        alignItems:'center',
+        paddingVertical:10,
     }
     
 });

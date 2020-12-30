@@ -29,9 +29,9 @@ export default function home() {
 
        <View style={styles.contentTitle}>
 
-            <Text style={[stylesFonts.title , {color:COLORS.Coloryellow , marginRight:10}]} >Databook</Text>
+            <Text style={[stylesFonts.title , {color:COLORS.Coloryellow , marginRight:10 }]} >Databook</Text>
 
-            <Image source={require('../../assets/pokebola.png')} style={{width:'20%' , height:'20%'}} resizeMode='contain'/>
+            <Image source={require('../../assets/pokebolaMini.png')} />
 
         </View>
 
@@ -50,7 +50,7 @@ export default function home() {
 
         <View style={styles.contentOrdem}> 
 
-            <Text style={[stylesFonts.title , { color:COLORS.Coloryellow , marginRight:10}]}>Ordem</Text>
+            <Text style={[stylesFonts.title , { color:COLORS.Coloryellow , marginRight:10 }]}>Ordem</Text>
 
             <MaterialIcons name="sort" size={30} color={COLORS.Coloryellow} />
 
