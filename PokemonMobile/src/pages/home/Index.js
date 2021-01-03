@@ -8,10 +8,11 @@ import {stylesFonts , COLORS, WidthScreen} from '../../Styles';
 import { Entypo , MaterialIcons} from '@expo/vector-icons';
 import RoutesTopBar from './TopBar';
 
-export default function home() {
+
+export default function home({props}) {
 
   const [seach , setSeach] = useState('');
-
+  const Navigation = useNavigation();
 
  return (
 
@@ -19,7 +20,7 @@ export default function home() {
 
      <SafeAreaView style={styles.contentTop}>
 
-       <TouchableOpacity>
+       <TouchableOpacity onPress={() => Navigation.openDrawer()}>
          <Entypo name="menu" size={30} color={COLORS.Coloryellow}/>
        </TouchableOpacity>
 

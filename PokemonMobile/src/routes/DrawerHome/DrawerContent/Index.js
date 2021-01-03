@@ -22,6 +22,7 @@ const drawerContent = (props) =>{
 
                 style={{elevation:1.5 , width:200 , borderRadius:10 }}
                 label='Home'
+                onPress={() =>  props.navigation.navigate('HomeScreen')}
                 labelStyle={[ stylesFonts.labelBold ,{ color: COLORS.Coloryellow , marginLeft:-10}]}
                 icon={() => <AntDesign name="home" size={24} color={COLORS.Coloryellow} />}
 
@@ -38,6 +39,7 @@ const drawerContent = (props) =>{
             <DrawerItem
                  style={{elevation:1.5 , width:200 , borderRadius:10 }}
                 label='Minha lista'
+                onPress={() =>  props.navigation.navigate('MyList')}
                 labelStyle={[ stylesFonts.labelBold ,{ color: COLORS.Coloryellow , marginLeft:-10}]}
                 icon={() => <Feather name="list" size={24} color={COLORS.Coloryellow}/>}
 

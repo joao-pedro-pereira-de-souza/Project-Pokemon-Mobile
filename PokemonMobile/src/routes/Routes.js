@@ -7,6 +7,7 @@ import DrawerScreensHome from './DrawerHome/Index';
 import SignIn from '../pages/signIn/Index';
 import SignUp from '../pages/signUp/Index';
 
+
 const Stack = createStackNavigator();
 
 const routes = () =>{
@@ -15,7 +16,7 @@ const routes = () =>{
 
         <NavigationContainer>
 
-            <Stack.Navigator headerMode={false} initialRouteName='Home' 
+            <Stack.Navigator headerMode={false} initialRouteName='MyList' 
             >
 
                 <Stack.Screen name='Home' component={DrawerScreensHome} />

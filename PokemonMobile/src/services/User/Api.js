@@ -58,3 +58,14 @@ export const PostSignUp = (JsonItens) =>{
 
 
 }
+
+export const DeleteItem = () =>{
+
+return new Promise((resolve, reject) => {
+
+    
+  
+})
+
+
+}

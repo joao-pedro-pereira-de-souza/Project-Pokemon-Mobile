@@ -4,8 +4,10 @@ import {COLORS} from '../../Styles'
 const styles = StyleSheet.create({
 
     container:{
-        flex:1,
-        backgroundColor: COLORS.Background
+
+        borderTopLeftRadius:30,
+        height:'85%' , 
+        backgroundColor: COLORS.Coloryellow
     }
     
 });

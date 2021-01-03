@@ -7,7 +7,7 @@ import Loading from 'expo-app-loading';
 import {COLORS , WidthScreen , stylesFonts} from '../../Styles';
 
 import CardRectangle from '../../components/cardRectangle/Index'
-import cardRectangle from '../../components/cardRectangle/Index';
+import Options from '../../components/headerOptions/Index'
 
 const Stack = createStackNavigator();
 
@@ -91,60 +91,8 @@ const ListeTodos = () =>{
 
         <View style={{flex:1 , backgroundColor: COLORS.Background }}>
 
-            <View style={stylesTopBar.listTab}>
-
-                    { ListTab.map(e => {
-
-                        if (e.status == '+') {
-
-                            return(
-
-                                <TouchableOpacity style={stylesTopBar.btnMore}  onPress={() => setStausFilter(e.status)}>
-
-                                    <Text style={[
-
-                                        stylesFonts.labelDescBold ,
-                                        {color:'#fff' , fontSize:12} 
-
-                                    ]}>+</Text>
-
-                                </TouchableOpacity>
-                                
-                            )
-                            
-                        }
-                        
-                        else{
-
-                            return(
-
-                                <TouchableOpacity style={[ 
-
-                                    stylesTopBar.btnTab , 
-                                    status === e.status && stylesTopBar.btnActive 
-        
-                                    ]} onPress={() => setStausFilter(e.status)}>
-                                
-                                <Text style={[ 
-        
-                                     stylesFonts.labelDescBold ,
-                                     {color:'#fff' , fontSize:12} , 
-                                     status == e.status && {color: '#fff'}]}
-                                     
-                                     >{e.status}</Text>
-        
-                                </TouchableOpacity>
-        
-
-                            )
-                        }
-
-
-                    })
-
-                    }
-
-            </View>
+             
+            <Options/>
 
             <View style={{alignItems:'center'}}>
 
