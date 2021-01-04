@@ -1,4 +1,4 @@
-let UrlListDefault = 'https://pokeapi.co/api/v2/pokemon';
+let UrlListDefault = 'https://pokeapi.co/api/v2/pokemon?limit=200&offset=200';
 
 export default {
 
@@ -23,7 +23,22 @@ export default {
             
         })
 
-    }
+    },
+    ListLimit : async (quant) =>{
 
+        return new Promise((resolve, reject) => {
+
+            fetch('https://pokeapi.co/api/v2/pokemon?limit=' + quant +'&offset=200')
+            .then(response => response.json())
+            .then(response => {
+                resolve(response.results)
+            }).catch(err =>{
+                reject(err)
+            })
+          
+        })
+        
+
+    }
 
 }

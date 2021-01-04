@@ -14,7 +14,7 @@ const heartList = () => {
 
   async function GetData  () {
 
-    setData(await Api.ListeDefault())
+    setData(await Api.ListLimit(3))
 
    }
 
@@ -36,7 +36,7 @@ const heartList = () => {
 
       return(
 
-        <View style={{ alignSelf:'center'}}>
+        <View style={{ alignSelf:'center' , marginBottom:10}}>
 
           <CardRectangle name={name} img={newUrl}/>
 
@@ -52,14 +52,18 @@ const heartList = () => {
 
     <View style={styles.container}>
 
-        <Text style={[stylesFonts.title , {color:COLORS.Coloryellow , alignSelf:'center'}]}>Lista de Curtidas</Text>
+        <Text style={[stylesFonts.title , {color:COLORS.Coloryellow , alignSelf:'center' , marginTop:30}]}>Lista de Curtidas</Text>
 
-        <FlatList
-        data={data}
-        renderItem={RederItens}
-        keyExtractor={(item , index) => String(index)}
-        
-        />
+       <View style={{marginTop:10}}>
+
+          <FlatList
+            data={data}
+            renderItem={RederItens}
+            keyExtractor={(item , index) => String(index)}
+            
+            />
+
+       </View>
 
     </View>
   
