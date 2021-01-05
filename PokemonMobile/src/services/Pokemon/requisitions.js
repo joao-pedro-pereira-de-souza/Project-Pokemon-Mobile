@@ -33,11 +33,11 @@ export default {
 
             case 'normal':
 
-                return '#eccc68'
+                return '#dfe6e9'
 
             case 'poison':
 
-                return '#9b59b6'
+                return '#33336B'
 
             case 'steel':
 
@@ -45,11 +45,40 @@ export default {
 
             case 'fairy':
 
-                return '#e056fds'
+                return '#ffb8b8'
 
             case 'dark':
 
-                return '#3d3d3d'
+                return '#4b4b4b'
+
+            case 'dragon':
+
+                return CategoryPokeColor.ColorDragon
+
+            case 'ground':
+
+                return '#A9702C'
+
+            case 'rock':
+
+                return '#48180B'
+
+            case 'ice':
+
+                return '#66D1E5'
+
+
+            case 'fighting':
+
+                return '#f0932b'
+
+            case 'ghost':
+
+                return '#5E2D88'
+
+            case 'flying':
+
+                return '#448A95'
 
             default:
                 return CategoryPokeColor.ColorNull

@@ -125,7 +125,7 @@ const ListeTodos = () =>{
 
             <View style={{alignItems:'center'}}>
 
-                {loading ? 
+                { loading ? 
                     (
                         <Text style={[stylesFonts.labelBold , {color:'#fff'}]}>Loading...</Text>
                     ):
@@ -141,11 +141,7 @@ const ListeTodos = () =>{
                         />
 
                     )
-            
-            
-               }
-
-              
+               }   
 
             </View>     
 

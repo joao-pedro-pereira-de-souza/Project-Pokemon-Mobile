@@ -14,7 +14,8 @@ export const COLORS =
 export const CategoryPokeColor = 
 {
 
-    ColorWater:'#6FA6A8',
+    ColorWater:'#17c0eb',
+    ColorDragon:'#8A55FD',
     ColorFire:'#FF5959',
     ColorDark:'#4b4b4b',
     ColorElectric:'#f1c40f',

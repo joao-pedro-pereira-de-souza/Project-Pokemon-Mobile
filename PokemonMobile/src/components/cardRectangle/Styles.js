@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
 
         position:'absolute',
         bottom:0,
-        elevation:10,
-        zIndex:0
+        elevation:20,
+
     },
 
     contentItens:{
@@ -31,12 +31,13 @@ const styles = StyleSheet.create({
     },
     img:{
         
-        width:WidthScreen *0.35 , 
-        height: WidthScreen *0.35 , 
+        width:WidthScreen *0.30 , 
+        height: WidthScreen *0.30 , 
         zIndex:1 , 
         position:'absolute' , 
-        top:-12,
-        alignSelf:'center'
+        top:0,
+        alignSelf:'center',
+        elevation:20
     },
     buttonVer:{
 

@@ -10,11 +10,28 @@ const cardRectangle = ({pokemon}) => {
     const sizeLabel = WidthScreen * 0.04;
 
     const sizeType = WidthScreen * 0.03;
+
+    const RederImage = () =>{
+        /*
+        !! Aviso : você pode usar a image original do "pokemon.sprites.front_default" , 
+        como o id dos pokémons são iguais não averá problemas em usar a outra plataforma
+
+        */
+
+        const  imgInit = pokemon.sprites.front_default
+
+        const NumericImg = imgInit.replace('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' , '')
+
+        let imgFull = 'https://pokeres.bastionbot.org/images/pokemon/' + NumericImg;
+
+        return imgFull
+
+    }
   return (
 
         <View style={styles.container}>
 
-            <Image source={{uri: pokemon.sprites.front_default}} style={styles.img}/>
+            <Image source={{uri: RederImage()}} style={styles.img}/>
 
             <View style={[styles.contentContainer , {backgroundColor: Requestion.ColorType(pokemon.types[0].type.name)}]}>
 
@@ -26,7 +43,20 @@ const cardRectangle = ({pokemon}) => {
           
                         {pokemon.types.map((types , i) =>{
 
-                        return(<Text  key={i} style={[ styles.labelType , stylesFonts.labelDescBold,{ backgroundColor: Requestion.ColorType(types.type.name) , fontSize: WidthScreen * 0.027}]}>{ types.type.name }</Text>)
+                        return(
+                        
+                              <Text  key={i} 
+
+                            style={[ 
+
+                                styles.labelType , 
+                                stylesFonts.labelDescBold, 
+                                { backgroundColor: Requestion.ColorType(types.type.name) , 
+                                fontSize: WidthScreen * 0.027}]}>{ types.type.name }
+                                
+                                </Text>
+                                
+                                )
 
                         })}
 
