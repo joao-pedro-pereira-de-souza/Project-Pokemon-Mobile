@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState , useEffect} from 'react';
 import { View  , SafeAreaView , Text , Image , TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './Styles';
@@ -9,7 +9,7 @@ import { Entypo , MaterialIcons} from '@expo/vector-icons';
 import RoutesTopBar from './TopBar';
 
 
-export default function home({props}) {
+export default function home() {
 
   const [seach , setSeach] = useState('');
   const Navigation = useNavigation();
@@ -48,16 +48,9 @@ export default function home({props}) {
               />
 
         </View>
-
-        <View style={styles.contentOrdem}> 
-
-            <Text style={[stylesFonts.title , { color:COLORS.Coloryellow , marginRight:10 }]}>Ordem</Text>
-
-            <MaterialIcons name="sort" size={30} color={COLORS.Coloryellow} />
-
-        </View>
-       
+ 
      </View>
+
 
     <RoutesTopBar/>
     

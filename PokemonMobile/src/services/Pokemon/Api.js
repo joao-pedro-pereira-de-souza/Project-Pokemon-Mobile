@@ -1,4 +1,4 @@
-let UrlListDefault = 'https://pokeapi.co/api/v2/pokemon?limit=200&offset=200';
+let UrlBase = 'https://pokeapi.co/api/v2/pokemon';
 
 export default {
 
@@ -7,11 +7,11 @@ export default {
 
         return new Promise((res , req) =>{
             
-            fetch(UrlListDefault)
+            fetch(UrlBase + '?limit=200&offset=200')
             .then(response => response.json())
             .then(response => {
 
-                res(response.results)
+                res(response)      
 
             })
             .catch(err => {
@@ -24,6 +24,7 @@ export default {
         })
 
     },
+
     ListLimit : async (quant) =>{
 
         return new Promise((resolve, reject) => {
@@ -37,8 +38,28 @@ export default {
             })
           
         })
-        
+
+    },
+
+    GetPokemon: async (url) =>{
+
+      return new Promise((resolve, reject) => {
+
+        fetch(url)
+        .then(res => res.json())
+        .then(data => {
+
+            resolve(data);
+
+        }).catch(err =>{
+            reject(err)
+        })
+
+      })
+      
 
     }
 
 }
+
+// Font: https://www.youtube.com/watch?v=HaEB0vdxpdg

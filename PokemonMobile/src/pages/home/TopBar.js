@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState , useEffect} from 'react';
 import { View , FlatList , TouchableOpacity , Text , StyleSheet } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,6 +8,8 @@ import {COLORS , WidthScreen , stylesFonts} from '../../Styles';
 
 import CardRectangle from '../../components/cardRectangle/Index'
 import Options from '../../components/headerOptions/Index'
+
+import Requestion from '../../services/Pokemon/requisitions'
 
 const Stack = createStackNavigator();
 
@@ -51,33 +53,60 @@ const ListeTodos = () =>{
 
     const [data , setData] = useState([])
 
-    async function GetData (){
+    const [loading , setLoading] = useState(true)
 
-        setData(await Api.ListeDefault())
+    useEffect(() =>{
 
+        async function fetchData (){
+
+            let response = await Api.ListeDefault();
+
+             await LoadingPokemon(response.results)
+    
+            setLoading(false)
+    
+        }
+
+        fetchData();
+
+       
+    }, [])
+
+
+    LoadingPokemon = async (data) =>{
+      
+        let _pokemonData = await Promise.all(
+       
+            data.map( async pokemon => {
+    
+            let pokemonRecord = await Api.GetPokemon(pokemon.url)
+    
+            return pokemonRecord
+    
+          })
+          
+          );
+    
+          setData(_pokemonData)
+    
     }
 
-    if(!GetData()){
-
-        return <Loading/>
-
-    }
-
-    const RederItem = (item , index) =>
+    const RederItem = (pokemon) =>
     {
 
+        /*
         const { name , url } = item.item
 
         const urlNumber = url.replace('https://pokeapi.co/api/v2/pokemon/' , '').replace('/' , '')
         // adicionando o id do pokemon na uri funcional
         const newUrl = 'https://pokeres.bastionbot.org/images/pokemon/'+ urlNumber + '.png'
-        
+        */
 
         return(
 
             <View style={{margin: 5}}>
 
-                <CardRectangle name={name} img={newUrl}/>
+                <CardRectangle pokemon={pokemon.item}/>
 
             </View>
 
@@ -96,13 +125,27 @@ const ListeTodos = () =>{
 
             <View style={{alignItems:'center'}}>
 
-                <FlatList
-                showsVerticalScrollIndicator={false}
-                data={data}
-                renderItem={RederItem}
-                keyExtractor={(item , index) => String(index)}
-                numColumns={2}
-                />
+                {loading ? 
+                    (
+                        <Text style={[stylesFonts.labelBold , {color:'#fff'}]}>Loading...</Text>
+                    ):
+
+                    (
+
+                        <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={data}
+                        renderItem={RederItem}
+                        keyExtractor={(item , index) => String(index)}
+                        numColumns={2}
+                        />
+
+                    )
+            
+            
+               }
+
+              
 
             </View>     
 

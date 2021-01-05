@@ -3,10 +3,9 @@ import {WidthScreen , HeightScreen , COLORS} from '../../Styles'
 const styles = StyleSheet.create({
    container:{
 
-        marginTop:10,
+        marginTop:30,
         flexDirection:'row',
         alignSelf:'center',
-        marginBottom:20,
         alignItems:'center'
        
      },

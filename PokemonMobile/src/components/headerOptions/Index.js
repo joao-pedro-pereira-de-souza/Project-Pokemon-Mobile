@@ -1,11 +1,83 @@
 import React,{useState} from 'react';
-import { View , TouchableOpacity , Text} from 'react-native';
+import { View , TouchableOpacity , Text , Switch} from 'react-native';
 import styles from './Styles'
-import {COLORS , stylesFonts} from '../../Styles'
+import {COLORS , stylesFonts} from '../../Styles';
+import Modal from 'react-native-modal'
+import { MaterialIcons } from '@expo/vector-icons';
+import {RadioButton} from 'react-native-paper'
+
+const ModalMore = (props) =>{
+
+    const [value, setValue] = useState(false);
+
+    const isLimitList = () =>{
+
+        setValue(value => !value)
+
+    }
+
+    return(
+
+        <Modal animationType='slide' visible={props.visible || false} transparent={true} animationIn='zoomIn'>
+
+            <View style={{width:300 , height:380, backgroundColor:COLORS.Background , elevation:10 , alignSelf:'center' , borderRadius:10}}>
+
+                <TouchableOpacity style={{position:'absolute' , left:8 , top:8}} onPress={() => props.getVisibleModal(false)}>
+
+                     <MaterialIcons name="keyboard-arrow-left" size={35} color={COLORS.Coloryellow} />
+
+                </TouchableOpacity>
+
+                <Text
+
+                style={[
+
+                    stylesFonts.labelBold ,
+                    {color:COLORS.Coloryellow , fontSize:17 , alignSelf:'center' , marginTop:10} 
+
+                ]}>
+                     Quantidade de pokémons
+
+                </Text>
+
+                <View style={{flexDirection:'row' , position:'relative' , left:15 , top:20 , alignItems:'center' }}>
+
+                    <Text 
+                    
+                    style={[
+
+                        stylesFonts.labelBold ,
+                        {color:COLORS.Coloryellow , fontSize:12 , alignSelf:'center'} 
+    
+                    ]}
+                    
+                    >Sem Limites de pokémons:</Text>
+
+                    <Switch
+                    
+                    value={value}
+
+                    onValueChange={isLimitList}
+                    
+                    /> 
+
+
+                </View>
+                
+             
+            </View>
+
+        </Modal>
+
+    )
+}
 
 const headerOptions = () => {
 
+    const [visibleModal , SetVisibleModal] = useState(false)
+
         //#region  TopBarSystem
+
         let ListTab = [
             {
                 status:'Todos'
@@ -39,6 +111,13 @@ const headerOptions = () => {
     
         //#endregion
 
+    const MoreFunction = (e) =>{
+
+        setStausFilter(e.status)
+        SetVisibleModal(true)
+
+    }
+    
   return (
   
     <View style={styles.container}>
@@ -49,7 +128,7 @@ const headerOptions = () => {
 
             return(
 
-                <TouchableOpacity style={styles.btnMore}  onPress={() => setStausFilter(e.status)}>
+                <TouchableOpacity style={styles.btnMore}  onPress={() => MoreFunction(e)}>
 
                     <Text style={[
 
@@ -85,7 +164,6 @@ const headerOptions = () => {
 
                 </TouchableOpacity>
 
-
             )
         }
 
@@ -93,6 +171,8 @@ const headerOptions = () => {
         })
 
         }
+        <ModalMore visible={visibleModal} getVisibleModal={SetVisibleModal}/>
+
 
     </View>
   
