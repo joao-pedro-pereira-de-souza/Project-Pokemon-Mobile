@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { View , SafeAreaView , TouchableOpacity , Text , FlatList} from 'react-native';
-import Loading from 'expo-app-loading';
+
 import { Entypo , MaterialIcons} from '@expo/vector-icons';
 import styles from './Styles';
-import Api from '../../services/Pokemon/Api';
+
 import {COLORS , stylesFonts} from '../../Styles';
 import {useNavigation} from '@react-navigation/native'
 import Options from '../../components/headerOptions/Index';
 import CardPokemon from '../../components/cardRectangle/Index';
 
-
+import ValuesStatic from '../../services/valuesStatic'
+import RequestionUser  from '../../services/User/requisitions';
+import Api from '../../services/Pokemon/Api'
 const MyList = () => {
 
   const [data , setData] = useState([]);
@@ -17,33 +19,48 @@ const MyList = () => {
 
   //#region  Api 
 
-  async function GetData  () {
+useEffect(()=>{
 
-    setData(await Api.ListeDefault())
+  async function GetList (){
 
-   }
+    // Para não consumir muita requisições na Api de usuários (no pacote gratuito pode ser feito 200 requisições por mês )
 
+    //await RequestionUser.RefreshMyList()
 
-  if (!GetData()) {
-
-    return <Loading />
-    
+    await LoadingPokemon(ValuesStatic.DadosUser.listPokemons.pokemons)
+  
   }
 
-    const RederItens = (item , index) =>{
+  GetList()
 
-      const {name , url} = item.item
+} , [])
 
-      const urlNumber = url.replace('https://pokeapi.co/api/v2/pokemon/' , '').replace('/' , '')
-      // adicionando o id do pokemon na uri funcional
-      const newUrl = 'https://pokeres.bastionbot.org/images/pokemon/'+ urlNumber + '.png'
+  LoadingPokemon = async (data) =>{
+        
+    let _pokemonData = await Promise.all(
+  
+        data.map( async pokemon => {
+
+        let pokemonRecord = await Api.GetPokemon('https://pokeapi.co/api/v2/pokemon/'+ pokemon +'/')
+
+        return pokemonRecord
+
+      })
       
+      );
 
+      setData(_pokemonData)
+
+  }
+
+
+    const RederItens = (item , index) =>{
+     
       return(
 
         <View style={{margin: 5}}>
 
-          <CardPokemon name={name} img={newUrl}/>
+          <CardPokemon pokemon={item.item}/>
 
         </View>
 
@@ -66,13 +83,7 @@ const MyList = () => {
 
         </SafeAreaView>
 
-        <View style={{flexDirection:'row' , alignItems:'center' , marginLeft:10 , marginTop:10}}>
-
-          <Text style={[stylesFonts.title , { color:COLORS.Coloryellow , marginRight:10 }]}>Ordem</Text>
-
-          <MaterialIcons name="sort" size={30} color={COLORS.Coloryellow} />
-
-        </View>
+        <Text style={[stylesFonts.title , { color:COLORS.Coloryellow , alignSelf:'center' }]}>Minha lista</Text>
 
         <Options/>
 

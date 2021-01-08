@@ -102,10 +102,11 @@ const headerOptions = () => {
     
         const [status , setStatus]= useState('Todos')
     
-        const setStausFilter = status =>{
+        const setStausFilter = (status) =>{
     
             setStatus(status)
-            console.log(status)
+
+           
     
         }
     
@@ -122,18 +123,18 @@ const headerOptions = () => {
   
     <View style={styles.container}>
 
-        { ListTab.map(e => {
+        { ListTab.map((e , i) => {
 
         if (e.status == '+') {
 
             return(
 
-                <TouchableOpacity style={styles.btnMore}  onPress={() => MoreFunction(e)}>
+                <TouchableOpacity key={i} style={styles.btnMore}  onPress={() => MoreFunction(e)}>
 
                     <Text style={[
 
                         stylesFonts.labelDescBold ,
-                        {color:'#fff' , fontSize:12} 
+                        {fontSize:12} 
 
                     ]}>+</Text>
 
@@ -147,7 +148,7 @@ const headerOptions = () => {
 
             return(
 
-                <TouchableOpacity style={[ 
+                <TouchableOpacity key={i} style={[ 
 
                     styles.btnTab , 
                     status === e.status && styles.btnActive 
@@ -157,7 +158,7 @@ const headerOptions = () => {
                 <Text style={[ 
 
                     stylesFonts.labelDescBold ,
-                    {color:'#fff' , fontSize:12} , 
+                    {fontSize:12} , 
                     status == e.status && {color: '#fff'}]}
                     
                     >{e.status}</Text>

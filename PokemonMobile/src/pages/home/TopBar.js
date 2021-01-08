@@ -3,13 +3,11 @@ import { View , FlatList , TouchableOpacity , Text , StyleSheet } from 'react-na
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Api from '../../services/Pokemon/Api';
-import Loading from 'expo-app-loading';
+
 import {COLORS , WidthScreen , stylesFonts} from '../../Styles';
 
 import CardRectangle from '../../components/cardRectangle/Index'
 import Options from '../../components/headerOptions/Index'
-
-import Requestion from '../../services/Pokemon/requisitions'
 
 const Stack = createStackNavigator();
 
@@ -61,17 +59,15 @@ const ListeTodos = () =>{
 
             let response = await Api.ListeDefault();
 
-             await LoadingPokemon(response.results)
-    
+            await LoadingPokemon(response.results)
+            
             setLoading(false)
     
         }
 
         fetchData();
 
-       
     }, [])
-
 
     LoadingPokemon = async (data) =>{
       
@@ -94,14 +90,6 @@ const ListeTodos = () =>{
     const RederItem = (pokemon) =>
     {
 
-        /*
-        const { name , url } = item.item
-
-        const urlNumber = url.replace('https://pokeapi.co/api/v2/pokemon/' , '').replace('/' , '')
-        // adicionando o id do pokemon na uri funcional
-        const newUrl = 'https://pokeres.bastionbot.org/images/pokemon/'+ urlNumber + '.png'
-        */
-
         return(
 
             <View style={{margin: 5}}>
@@ -120,7 +108,6 @@ const ListeTodos = () =>{
 
         <View style={{flex:1 , backgroundColor: COLORS.Background }}>
 
-             
             <Options/>
 
             <View style={{alignItems:'center'}}>

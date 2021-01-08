@@ -15,18 +15,18 @@ const cardRectangle02 = (props) => {
 
           <View style={{marginLeft: WidthScreen * 0.18 , marginTop: WidthScreen * 0.02 }}>
 
-              <Text style={[stylesFonts.title , {color:'#fff' , fontSize:25}]}>{props.name}</Text>
+              <Text style={[stylesFonts.title , { fontSize:25}]}>{props.name}</Text>
 
-              <Text  style={[stylesFonts.labelDesc , {color:'#fff' , opacity: 0.8 , fontSize:11, width:120}]}>
+              <Text  style={[stylesFonts.labelDesc , { opacity: 0.8 , fontSize:11, width:120}]}>
                 No momento os detalhes do pokémon ainda está sendo desenvolvido
               </Text>
 
           </View>
 
           <View style={{alignItems:'center' , position:'absolute' , bottom:8 , right:8}}>
-            <Text style={[ stylesFonts.labelBold ,{color:'#fff'}]} >---</Text>
+            <Text style={[ stylesFonts.labelBold ]} >---</Text>
 
-            <Text style={[ stylesFonts.labelDescBold ,{color:'#fff' , opacity:0.8 , fontSize:13}]} >Points</Text>
+            <Text style={[ stylesFonts.labelDescBold ,{ opacity:0.8 , fontSize:13}]} >Points</Text>
           </View>
 
 

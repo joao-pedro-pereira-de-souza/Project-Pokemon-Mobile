@@ -34,7 +34,8 @@ const routes = ({style}) => {
 
         >
 
-            <Stack.Navigator headerMode={false}>
+            <Stack.Navigator headerMode={false} initialRouteName='MyList'>
+                
                 <Stack.Screen name='HomeScreen' component={HomeScreen}/>
                 <Stack.Screen name='MyList' component={MyList} />
                 <Stack.Screen name='Curtidas' component={HeartScreen} />

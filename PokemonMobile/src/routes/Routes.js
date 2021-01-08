@@ -16,7 +16,7 @@ const routes = () =>{
 
         <NavigationContainer>
 
-            <Stack.Navigator headerMode={false} initialRouteName='MyList' 
+            <Stack.Navigator headerMode={false} 
             >
 
                 <Stack.Screen name='Home' component={DrawerScreensHome} />

@@ -10,34 +10,18 @@ const cardRectangle = ({pokemon}) => {
     const sizeLabel = WidthScreen * 0.04;
 
     const sizeType = WidthScreen * 0.03;
-
-    const RederImage = () =>{
-        /*
-        !! Aviso : você pode usar a image original do "pokemon.sprites.front_default" , 
-        como o id dos pokémons são iguais não averá problemas em usar a outra plataforma
-
-        */
-
-        const  imgInit = pokemon.sprites.front_default
-
-        const NumericImg = imgInit.replace('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' , '')
-
-        let imgFull = 'https://pokeres.bastionbot.org/images/pokemon/' + NumericImg;
-
-        return imgFull
-
-    }
+    
   return (
 
         <View style={styles.container}>
 
-            <Image source={{uri: RederImage()}} style={styles.img}/>
+            <Image source={{uri: Requestion.RederNewImage(pokemon.sprites.front_default)}} style={styles.img}/>
 
             <View style={[styles.contentContainer , {backgroundColor: Requestion.ColorType(pokemon.types[0].type.name)}]}>
 
                 <View style={styles.contentItens}>
 
-                     <Text style={[stylesFonts.labelBold , {color:'#fff' , alignSelf:'center'}]}>{pokemon.name}</Text>
+                     <Text style={[stylesFonts.labelBold , { alignSelf:'center'}]}>{pokemon.name}</Text>
                      
                      <View style={{flexDirection:'row' , marginTop:10}}>
           
@@ -66,17 +50,17 @@ const cardRectangle = ({pokemon}) => {
 
                         <View style={{alignItems:'center' , marginRight:6}}>
 
-                            <Text style={[stylesFonts.titleItalic , {color:'#fff' , fontSize: sizeLabel}]}>Weght</Text>
+                            <Text style={[stylesFonts.titleItalic , {fontSize: sizeLabel}]}>Weght</Text>
 
-                            <Text style={[stylesFonts.labelDescBold , {color:'#fff' , opacity:0.8 , fontSize:sizeLabel}]}>{pokemon.weight}</Text>
+                            <Text style={[stylesFonts.labelDescBold , {opacity:0.8 , fontSize:sizeLabel}]}>{pokemon.weight}</Text>
 
                         </View>
 
                         <View style={{alignItems:'center'}}>
 
-                            <Text style={[stylesFonts.titleItalic , {color:'#fff' , fontSize:sizeLabel}]}>Height</Text>
+                            <Text style={[stylesFonts.titleItalic , {fontSize:sizeLabel}]}>Height</Text>
 
-                            <Text style={[stylesFonts.labelDescBold , {color:'#fff' , opacity:0.8 , fontSize:sizeLabel}]}>{pokemon.height}</Text>
+                            <Text style={[stylesFonts.labelDescBold , {opacity:0.8 , fontSize:sizeLabel}]}>{pokemon.height}</Text>
 
                         </View>
 
@@ -84,7 +68,7 @@ const cardRectangle = ({pokemon}) => {
                     
                     <TouchableOpacity style={styles.buttonVer}>
 
-                        <Text style={[stylesFonts.labelDescBold , {color:'#fff' , fontSize :sizeLabel}]}>Ver mais</Text>
+                        <Text style={[stylesFonts.labelDescBold , {fontSize :sizeLabel}]}>Ver mais</Text>
 
                     </TouchableOpacity>
 

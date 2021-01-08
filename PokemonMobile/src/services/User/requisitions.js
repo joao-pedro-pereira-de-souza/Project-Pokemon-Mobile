@@ -1,5 +1,5 @@
-import { GetUsers , PostSignUp}from './Api'
-
+import { GetUsers , PostSignUp , GetMyList }from './Api'
+import ValuesStatic from '../valuesStatic'
 
 export default {
 
@@ -24,23 +24,17 @@ export default {
                         }      
                     
                    }
-    
-                  
+      
                 });
     
                rest(boolUser)  
-    
-
             }
 
             catch{
                console.log('Erro no sistema')
             }
  
-
         })
-
-
     },
 
     SignUp : async (Array)=>
@@ -58,6 +52,28 @@ export default {
 
         })
 
+    },
+
+    RefreshMyList: async () =>{
+
+        GetMyList().then(content =>{
+    
+            content.listaPokemon.map(user =>{
+    
+                if(user.id == ValuesStatic.DadosUser.login.id){
+    
+                    let array = user.pokemons.split(',')
+    
+                    ValuesStatic.DadosUser.listPokemons.pokemons = array
+    
+                }
+        
+            })
+        
+    
+        })
+
     }
+      
 
 }

@@ -1,5 +1,8 @@
 
+import React, {useState} from 'react'
 import {CategoryPokeColor} from '../../Styles'
+import Api from './Api'
+
 export default {
 
     ColorType: (type) => {
@@ -29,27 +32,27 @@ export default {
 
             case 'bug':
 
-                return '#7bed9f'
+                return CategoryPokeColor.ColorBug
 
             case 'normal':
 
-                return '#dfe6e9'
+                return CategoryPokeColor.ColorNormal
 
             case 'poison':
 
-                return '#33336B'
+                return CategoryPokeColor.ColorPoison
 
             case 'steel':
 
-                return '#7f8c8d'
+                return CategoryPokeColor.ColorSteel
 
             case 'fairy':
 
-                return '#ffb8b8'
+                return CategoryPokeColor.ColorFairy
 
             case 'dark':
 
-                return '#4b4b4b'
+                return CategoryPokeColor.ColorDark
 
             case 'dragon':
 
@@ -57,28 +60,28 @@ export default {
 
             case 'ground':
 
-                return '#A9702C'
+                return CategoryPokeColor.ColorGround
 
             case 'rock':
 
-                return '#48180B'
+                return CategoryPokeColor.ColorRock
 
             case 'ice':
 
-                return '#66D1E5'
+                return CategoryPokeColor.ColorIce
 
 
             case 'fighting':
 
-                return '#f0932b'
+                return CategoryPokeColor.ColorFighting
 
             case 'ghost':
 
-                return '#5E2D88'
+                return CategoryPokeColor.ColorGhost
 
             case 'flying':
 
-                return '#448A95'
+                return CategoryPokeColor.ColorFlying
 
             default:
                 return CategoryPokeColor.ColorNull
@@ -86,10 +89,20 @@ export default {
 
     },
 
-    LoadignPokemon: async (data) =>{
+    RederNewImage: (url) =>{
 
-     
-        
-    }
+        /*
+        !! Aviso : você pode usar a image original do "pokemon.sprites.front_default" , 
+        como o id dos pokémons são iguais não averá problemas em usar a outra plataforma
+
+        */
+
+        let Numeric = url.replace('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' , '');
+
+        return 'https://pokeres.bastionbot.org/images/pokemon/' + Numeric
+
+    },
+  
 
 }
+
