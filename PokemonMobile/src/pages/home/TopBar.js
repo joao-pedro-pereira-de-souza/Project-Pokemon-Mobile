@@ -8,45 +8,13 @@ import {COLORS , WidthScreen , stylesFonts} from '../../Styles';
 
 import CardRectangle from '../../components/cardRectangle/Index'
 import Options from '../../components/headerOptions/Index'
+import Input from '../../components/inputText/Index';
 
 const Stack = createStackNavigator();
 
 const ListeTodos = () =>{
 
-    //#region  TopBarSystem
-    let ListTab = [
-        {
-            status:'Todos'
-        },
-    
-        {
-            status:'Água'
-        },
-    
-        {
-            status:'Fogo'
-        },
-        {
-            status:'Terra'
-        },
-
-        {
-            status:'+'
-        },
-    
-    ]
-
-    const [status , setStatus]= useState('Todos')
-
-    const setStausFilter = status =>{
-
-        setStatus(status)
-        console.log(status)
-
-    }
-
-    //#endregion
-
+    const [seach , setSeach] = useState('');
     //#region Configs List Api PokéApi
 
     const [data , setData] = useState([])
@@ -90,11 +58,12 @@ const ListeTodos = () =>{
     const RederItem = (pokemon) =>
     {
 
+
         return(
 
             <View style={{margin: 5}}>
 
-                <CardRectangle pokemon={pokemon.item}/>
+                <CardRectangle pokemon={pokemon.item} />
 
             </View>
 
@@ -104,9 +73,35 @@ const ListeTodos = () =>{
 
     //#endregion
 
+    const SystemSearch = (text) =>{
+
+       setSeach(text)
+
+       let backData = data;
+
+       let result = backData.filter(i => i.item.name.includes(text))
+
+       setData(result)
+
+    }
     return(
 
         <View style={{flex:1 , backgroundColor: COLORS.Background }}>
+
+            <View style={{marginHorizontal:30}}>
+
+            <Input
+
+                bg={COLORS.ColorBlue}
+                place='Pesquisar...'
+                value={seach}
+                onChange={(text) => SystemSearch(text)}
+
+                />
+
+            </View>
+
+               
 
             <Options/>
 
@@ -114,7 +109,7 @@ const ListeTodos = () =>{
 
                 { loading ? 
                     (
-                        <Text style={[stylesFonts.labelBold , {color:'#fff'}]}>Loading...</Text>
+                        <Text style={[stylesFonts.labelBold]}>Loading...</Text>
                     ):
 
                     (
@@ -122,7 +117,7 @@ const ListeTodos = () =>{
                         <FlatList
                         showsVerticalScrollIndicator={false}
                         data={data}
-                        renderItem={RederItem}
+                        renderItem={ RederItem }
                         keyExtractor={(item , index) => String(index)}
                         numColumns={2}
                         />

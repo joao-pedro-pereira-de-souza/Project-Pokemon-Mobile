@@ -9,8 +9,8 @@ import {useNavigation} from '@react-navigation/native'
 import Options from '../../components/headerOptions/Index';
 import CardPokemon from '../../components/cardRectangle/Index';
 
-import ValuesStatic from '../../services/valuesStatic'
-import RequestionUser  from '../../services/User/requisitions';
+import ValuesStatic from '../../services/User/valuesStatic'
+
 import Api from '../../services/Pokemon/Api'
 const MyList = () => {
 
@@ -53,6 +53,7 @@ useEffect(()=>{
 
   }
 
+  //#endregion
 
     const RederItens = (item , index) =>{
      

@@ -8,11 +8,10 @@ import {stylesFonts , COLORS, WidthScreen} from '../../Styles';
 import { Entypo , MaterialIcons} from '@expo/vector-icons';
 import RoutesTopBar from './TopBar';
 
+import RoutesValue from '../../services/navigation'
+export default function home(props) {
 
-export default function home() {
-
-  const [seach , setSeach] = useState('');
-  const Navigation = useNavigation();
+  //RoutesValue.routes.navigate('MyList' , {title:'isso'})
 
  return (
 
@@ -20,7 +19,7 @@ export default function home() {
 
      <SafeAreaView style={styles.contentTop}>
 
-       <TouchableOpacity onPress={() => Navigation.openDrawer()}>
+       <TouchableOpacity onPress={() => RoutesValue.routes.OpenDrawer()}>
          <Entypo name="menu" size={30} color={COLORS.Coloryellow}/>
        </TouchableOpacity>
 
@@ -35,23 +34,10 @@ export default function home() {
             <Image source={require('../../assets/pokebolaMini.png')} />
 
         </View>
-
-        <View style={styles.contentSearch}>
-
-            <Input
-
-              bg={COLORS.ColorBlue}
-              place='Pesquisar...'
-              value={seach}
-              onChange={(text) => setSeach(text)}
-
-              />
-
-        </View>
  
      </View>
 
-    <RoutesTopBar/>
+    <RoutesTopBar />
     
    </View>
 

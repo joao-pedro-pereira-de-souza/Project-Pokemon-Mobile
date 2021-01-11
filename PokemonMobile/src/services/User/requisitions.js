@@ -1,5 +1,5 @@
 import { GetUsers , PostSignUp , GetMyList }from './Api'
-import ValuesStatic from '../valuesStatic'
+import ValuesStatic from './valuesStatic'
 
 export default {
 

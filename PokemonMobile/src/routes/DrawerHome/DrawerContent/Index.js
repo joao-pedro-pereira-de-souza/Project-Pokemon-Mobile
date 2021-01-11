@@ -3,8 +3,15 @@ import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {View , Image , Text , StyleSheet} from 'react-native'
 import {COLORS , stylesFonts} from '../../../Styles'
 import { AntDesign , Feather , MaterialIcons} from '@expo/vector-icons';
+import Routes from '../../../services/navigation'
+
+import {useNavigation} from '@react-navigation/native';
 
 const drawerContent = (props) =>{
+
+    const Navigation = useNavigation()
+
+    Routes.routes = Navigation;
 
     return(
 
