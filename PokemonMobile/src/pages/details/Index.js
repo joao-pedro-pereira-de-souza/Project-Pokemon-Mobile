@@ -2,17 +2,21 @@ import React,{useEffect , useState} from 'react';
 
 import {ScrollView} from 'react-native-gesture-handler'
 import { View , Image , Text , TouchableOpacity} from 'react-native';
-import { COLORS , stylesFonts , WidthScreen} from '../../Styles';
+import { COLORS , stylesFonts , WidthScreen , HeightScreen} from '../../Styles';
 import styles from './Styles';
 import Api from '../../services/Pokemon/Api'
 import { Ionicons , AntDesign , MaterialIcons} from '@expo/vector-icons';
 import {CategoryPokeColor} from '../../Styles'
+
 import Requestion from '../../services/Pokemon/requisitions';
 import ProgressBar from '../../components/progressBar/Index';
+import RoutesValue from '../../services/navigation'
 
 export default function details({route}) {
 
   const [ data , setData] = useState([])
+
+  const [dataDescription , setDataDescription] = useState([])
 
   const [isHeart , setIsHeart] = useState(false)
 
@@ -23,6 +27,12 @@ export default function details({route}) {
     async function GetData(){
 
       await LoadingPokemon([route.params.id])
+
+      let details = await Api.GetPokemon('https://pokeapi.co/api/v2/pokemon-species/'+ route.params.id +'/')
+
+      setDataDescription(details)
+
+      //console.log(dataDescription['id'])
 
       setLoading(false)
 
@@ -55,6 +65,7 @@ export default function details({route}) {
   const ModifIsHeart = () =>{
     setIsHeart(heart => !heart);
   }
+
   const verificationPorceLimit = (value) =>{
 
     if (Number.parseInt(value) > 100) {
@@ -96,6 +107,16 @@ export default function details({route}) {
     }
 
   }
+
+  const RemoveBrText = () =>{
+
+    let text = dataDescription['flavor_text_entries'][0]['flavor_text'].trim();
+
+  
+  return text
+
+  }
+
 if(loading){
 
   return <Text>loading....</Text>
@@ -112,7 +133,7 @@ else{
 
          <View style={styles.headerTop}>
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() =>  RoutesValue.routes.OpenDrawer()}>
 
                   <Ionicons name="ios-menu" size={26} color="#fff" />
                 
@@ -127,9 +148,9 @@ else{
 
          </View>
  
-           <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + route.params.id+ '.png'}} style={{width:180 , height:180 , zIndex:1 , alignSelf:'center' , marginTop:20}}/>
+           <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + route.params.id+ '.png'}} 
+           style={ styles.img }/>
             
-
        </View>
  
        <View style={styles.contentInfo}>
@@ -155,34 +176,30 @@ else{
 
         <ScrollView showsVerticalScrollIndicator={false}>
 
+          <Text style={[stylesFonts.labelDesc , {width:'100%' , marginHorizontal:20 , opacity:0.8 }]}>{RemoveBrText()}</Text>
+
+            <ScrollView style={{marginVertical:8 , marginLeft:WidthScreen * 0.064}} horizontal showsHorizontalScrollIndicator={false}>
+
+               {  data[0]['types'].map(types =>{
+
+                     return (
+
+                         <View style={[ styles.typeContent ,{backgroundColor:Requestion.ColorType(types.type.name)}]}>
+
+                              <Text style={[stylesFonts.labelDescBold]}>{types.type.name}</Text>
+
+                         </View>
+
+                     )
+
+                  }) 
+               
+               
+               }
+      
+            </ScrollView>
+
             <View style={{alignSelf:'center'}}>
-              
-              {/*  outra ideia
-              
-                <FlatList
-               
-               renderItem={(stat) =>{ 
-                 
-                return(
-
-                      <View style={{padding:10 , alignItems:'center' ,alignSelf:'center'}} >
-
-                        <Text style={[stylesFonts.labelDesc]}>{stat.item['stat']['name'] + ':'}</Text>
-
-                        <Text style={[stylesFonts.labelDesc]}>{stat.item['base_stat']}</Text>
-                        
-                      </View>
-                  )
-              
-              }}
-
-               data ={data[0]['stats']}
-               keyExtractor={(item , i) => String(i)}
-               numColumns={2}
-               
-               />
-              
-              */}
 
                 { data[0]['stats'].map( stat =>{
 
@@ -207,8 +224,28 @@ else{
                 }
 
 
-            </View>
+            </View> 
 
+            <View style={styles.contentPokeList}>
+            
+                  <View style={{flexDirection:'row' }}>
+
+                        <Text style={[stylesFonts.labelDesc ,{textAlignVertical:'center' , marginRight:5}]}>{data[0].height}</Text>
+
+                          <View style={{borderLeftWidth: 3, borderBottomWidth:3 ,borderColor: Requestion.ColorType( data[0]['types'][0]['type']['name'] ) }}>
+
+                              <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + route.params.id+ '.png'}} 
+                                    style={ {width:WidthScreen * 0.40, height:WidthScreen * 0.40 }}/>
+
+                          </View>
+
+                  </View>
+
+                  <Text style={[stylesFonts.labelDesc]}>{data[0].weight}</Text>
+
+              </View>
+
+            
         </ScrollView>
          
        </View>

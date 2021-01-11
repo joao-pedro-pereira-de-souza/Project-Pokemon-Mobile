@@ -21,12 +21,11 @@ const progressBar = (props) => {
 
         }
 
-
     }
 
   return (
 
-        <View style={{width: widthMaxProgress , backgroundColor:'#F1C242' , height:30 , elevation:2 , marginVertical:5}}>
+        <View style={{width: widthMaxProgress , backgroundColor:'#F1C242' , height:30 , elevation:1 , marginVertical:5}}>
 
             <View style={{width: ContPorcen() , height:'100%' , backgroundColor: props.colorProgress }}/>
             
