@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
 
         width:180 , 
         height:180 , 
-        zIndex:1 , 
         alignSelf:'center' , 
         marginTop:marginespace
 
@@ -68,7 +67,8 @@ const styles = StyleSheet.create({
         display:'flex',
 
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        marginBottom:30
     }
 
     

@@ -7,11 +7,13 @@ import styles from './Styles';
 import Api from '../../services/Pokemon/Api'
 import { Ionicons , AntDesign , MaterialIcons} from '@expo/vector-icons';
 import {CategoryPokeColor} from '../../Styles'
-
+import * as Animatable from 'react-native-animatable';
 import Requestion from '../../services/Pokemon/requisitions';
 import ProgressBar from '../../components/progressBar/Index';
 import RoutesValue from '../../services/navigation'
+import Animated from 'react-native-reanimated';
 
+const imgLoading = require('../../assets/GifLoading.gif')
 export default function details({route}) {
 
   const [ data , setData] = useState([])
@@ -119,9 +121,19 @@ export default function details({route}) {
 
 if(loading){
 
-  return <Text>loading....</Text>
+  return (
+
+      <View style={{flex:1 , backgroundColor: COLORS.Background , alignItems:'center' , justifyContent:'center'}}>
+
+        <Image source={ imgLoading } style={{width:300 , height:300}}/>
+
+      </View>
+
+  
+    )
 
 }
+
 else{
   return (
       // Aviso!!! 
@@ -133,7 +145,7 @@ else{
 
          <View style={styles.headerTop}>
 
-              <TouchableOpacity onPress={() =>  RoutesValue.routes.OpenDrawer()}>
+              <TouchableOpacity onPress={() => RoutesValue.routes.OpenDrawer()}>
 
                   <Ionicons name="ios-menu" size={26} color="#fff" />
                 
@@ -147,107 +159,117 @@ else{
 
 
          </View>
- 
-           <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + route.params.id+ '.png'}} 
-           style={ styles.img }/>
+
+         <Animatable.View animation='slideInDown' style={{zIndex:1}} duration={500}>
+
+          <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + route.params.id+ '.png'}} 
+            style={ styles.img }/>
+
+         </Animatable.View>
             
        </View>
  
        <View style={styles.contentInfo}>
 
-         <View style={styles.headerInfoContent}>
+         <Animatable.View animation='fadeInLeftBig' style={{flex:1}}>
 
-              <View style={{flexDirection:'row' , alignItems:'center' }}>
+            <View style={styles.headerInfoContent}>
 
-                    <Text style={[stylesFonts.titleItalic]} >{data[0]['name']}</Text>
+                      <View style={{flexDirection:'row' , alignItems:'center' }}>
 
-                    <MaterialIcons style={{marginTop:8}} name="keyboard-arrow-right" size={40} color="#fff" />
+                            <Text style={[stylesFonts.titleItalic]} >{data[0]['name']}</Text>
 
-              </View>
-              
-                <View style={{alignItems:'center'}}>
+                            <MaterialIcons style={{marginTop:8}} name="keyboard-arrow-right" size={40} color="#fff" />
 
-                      <Text style={[stylesFonts.title]} >{data[0]['base_experience']}</Text>
-                      <Text style={[stylesFonts.labelDesc , {opacity:0.8}]} >Pontos</Text>                
+                      </View>
 
-                </View>
+                      <View style={{alignItems:'center'}}>
 
-         </View>
+                              <Text style={[stylesFonts.title]} >{data[0]['base_experience']}</Text>
+                              <Text style={[stylesFonts.labelDesc , {opacity:0.8}]} >Pontos</Text>                
 
-        <ScrollView showsVerticalScrollIndicator={false}>
+                        </View>
 
-          <Text style={[stylesFonts.labelDesc , {width:'100%' , marginHorizontal:20 , opacity:0.8 }]}>{RemoveBrText()}</Text>
+            </View>
 
-            <ScrollView style={{marginVertical:8 , marginLeft:WidthScreen * 0.064}} horizontal showsHorizontalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
-               {  data[0]['types'].map(types =>{
+                      <Text style={[stylesFonts.labelDesc , {width:'100%' , marginHorizontal:20 , opacity:0.8 }]}>{RemoveBrText()}</Text>
 
-                     return (
+                      <ScrollView style={{marginVertical:8 , marginLeft:WidthScreen * 0.064}} horizontal showsHorizontalScrollIndicator={false}>
 
-                         <View style={[ styles.typeContent ,{backgroundColor:Requestion.ColorType(types.type.name)}]}>
+                      {  data[0]['types'].map(types =>{
 
-                              <Text style={[stylesFonts.labelDescBold]}>{types.type.name}</Text>
+                            return (
 
-                         </View>
+                                <View style={[ styles.typeContent ,{backgroundColor:Requestion.ColorType(types.type.name)}]}>
 
-                     )
+                                      <Text style={[stylesFonts.labelDescBold]}>{types.type.name}</Text>
 
-                  }) 
-               
-               
-               }
-      
-            </ScrollView>
+                                </View>
 
-            <View style={{alignSelf:'center'}}>
+                            )
 
-                { data[0]['stats'].map( stat =>{
+                          }) 
+                      
+                      
+                      }
 
-                      return (
+                      </ScrollView>
 
-                        <>
-                              <View style={{flexDirection:'row'}} >
+                      <View style={{alignSelf:'center'}}>
 
-                                <Text style={[stylesFonts.labelDesc]}>{stat['stat']['name'] + ':'}</Text>
+                        { data[0]['stats'].map( stat =>{
 
-                                {verificationPorceLimit( stat['base_stat'] )}
-                                
-                              </View>
-                              <ProgressBar width={stat['base_stat']} colorProgress={ Requestion.ColorType( data[0]['types'][0]['type']['name'] )}/>
+                              return (
 
-                        </>
-                            
-                      )
+                                <>
+                                      <View style={{flexDirection:'row'}} >
 
-                  })
+                                        <Text style={[stylesFonts.labelDesc]}>{stat['stat']['name'] + ':'}</Text>
 
-                }
+                                        {verificationPorceLimit( stat['base_stat'] )}
+                                        
+                                      </View>
+                                      <ProgressBar width={stat['base_stat']} colorProgress={ Requestion.ColorType( data[0]['types'][0]['type']['name'] )}/>
+
+                                </>
+                                    
+                              )
+
+                          })
+
+                        }
 
 
-            </View> 
+                      </View> 
 
-            <View style={styles.contentPokeList}>
-            
-                  <View style={{flexDirection:'row' }}>
+                      <View style={styles.contentPokeList}>
 
-                        <Text style={[stylesFonts.labelDesc ,{textAlignVertical:'center' , marginRight:5}]}>{data[0].height}</Text>
+                          <View style={{flexDirection:'row' }}>
 
-                          <View style={{borderLeftWidth: 3, borderBottomWidth:3 ,borderColor: Requestion.ColorType( data[0]['types'][0]['type']['name'] ) }}>
+                                <Text style={[stylesFonts.labelDesc ,{textAlignVertical:'center' , marginRight:5}]}>{data[0].height}</Text>
 
-                              <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + route.params.id+ '.png'}} 
-                                    style={ {width:WidthScreen * 0.40, height:WidthScreen * 0.40 }}/>
+                                  <View style={{borderLeftWidth: 3, borderBottomWidth:3 ,borderColor: Requestion.ColorType( data[0]['types'][0]['type']['name'] ) }}>
+
+                                      <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + route.params.id+ '.png'}} 
+                                            style={ {width:WidthScreen * 0.40, height:WidthScreen * 0.40 }}/>
+
+                                  </View>
 
                           </View>
 
-                  </View>
+                          <Text style={[stylesFonts.labelDesc]}>{data[0].weight}</Text>
 
-                  <Text style={[stylesFonts.labelDesc]}>{data[0].weight}</Text>
+                      </View>
 
-              </View>
 
-            
-        </ScrollView>
-         
+             </ScrollView>
+
+
+         </Animatable.View>
+
+       
        </View>
  
     </View>

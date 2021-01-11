@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     buttonVer:{
 
         width:'90%',
-        height: HeightScreen * 0.06,
+        height: HeightScreen * 0.07,
         elevation:2,
         alignItems:'center',
         justifyContent:'center',

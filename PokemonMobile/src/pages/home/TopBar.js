@@ -1,5 +1,5 @@
 import React,{useState , useEffect} from 'react';
-import { View , FlatList , TouchableOpacity , Text , StyleSheet } from 'react-native';
+import { View , FlatList , TouchableOpacity , Text , StyleSheet ,Image } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Api from '../../services/Pokemon/Api';
@@ -11,6 +11,8 @@ import Options from '../../components/headerOptions/Index'
 import Input from '../../components/inputText/Index';
 
 const Stack = createStackNavigator();
+
+const imgLoading = require('../../assets/GifLoading.gif')
 
 const ListeTodos = () =>{
 
@@ -109,7 +111,7 @@ const ListeTodos = () =>{
 
                 { loading ? 
                     (
-                        <Text style={[stylesFonts.labelBold]}>Loading...</Text>
+                        <Image source={ imgLoading } style={{width:300 , height:300, alignSelf:'center'}}/>
                     ):
 
                     (
