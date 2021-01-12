@@ -7,13 +7,10 @@ import  RoutesValue from '../../services/navigation'
 
 const cardRectangle = ({pokemon }) => {
 
-    const sizeLabel = WidthScreen * 0.04;
-
-    const sizeType = WidthScreen * 0.03;
+    const sizeLabel = WidthScreen * 0.044;
 
     const Details = () =>{
       
-
         RoutesValue.routes.navigate('Details' , {id:pokemon.id})
 
     }
@@ -53,23 +50,11 @@ const cardRectangle = ({pokemon }) => {
 
                     </View>
 
-                    <View style={{flexDirection:'row' , marginTop:5}}>
+                    <View style={{ marginTop:5 , alignItems:'center'}}>
 
-                        <View style={{alignItems:'center' , marginRight:6}}>
+                        <Text style={[stylesFonts.titleItalic , {fontSize: sizeLabel}]}>{pokemon['base_experience']}</Text>
 
-                            <Text style={[stylesFonts.titleItalic , {fontSize: sizeLabel}]}>Weght</Text>
-
-                            <Text style={[stylesFonts.labelDescBold , {opacity:0.8 , fontSize:sizeLabel}]}>{pokemon.weight}</Text>
-
-                        </View>
-
-                        <View style={{alignItems:'center'}}>
-
-                            <Text style={[stylesFonts.titleItalic , {fontSize:sizeLabel}]}>Height</Text>
-
-                            <Text style={[stylesFonts.labelDescBold , {opacity:0.8 , fontSize:sizeLabel}]}>{pokemon.height}</Text>
-
-                        </View>
+                        <Text style={[stylesFonts.labelDescBold , {opacity:0.8 , fontSize:sizeLabel}]}>Pontos</Text>
 
                     </View>
                     

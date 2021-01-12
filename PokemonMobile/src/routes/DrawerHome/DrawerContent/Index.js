@@ -64,6 +64,7 @@ const drawerContent = (props) =>{
             <DrawerItem
                 style={{elevation:1.5 , width:200 , borderRadius:10 }}
                 label='Chat'
+                onPress={() =>props.navigation.navigate('ChatHome')} 
                 labelStyle={[ stylesFonts.labelBold ,{ color: COLORS.Coloryellow , marginLeft:-10}]}
                 icon={() => <MaterialIcons name="chat-bubble-outline" size={24} color={COLORS.Coloryellow} />}
                 

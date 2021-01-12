@@ -4,7 +4,7 @@ import styles from './Styles'
 import {COLORS , stylesFonts} from '../../Styles';
 import Api from '../../services/Pokemon/Api';
 import Loading from 'expo-app-loading';
-import CardRectangle from '../../components/cardRectangle02/Index'
+import CardRectangle from '../../components/cardFriend/Index'
 
 
 const heartList = () => {

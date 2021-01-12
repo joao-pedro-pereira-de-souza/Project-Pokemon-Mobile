@@ -1,15 +1,13 @@
 import React,{useState} from 'react';
 import { View  , Text , TouchableOpacity , SafeAreaView} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler'
-
-// import { Container } from './styles';
 import styles from './Styles';
 import Input from '../../components/inputText/Index'
 import {COLORS , stylesFonts , imgPerfil} from '../../Styles'
 import { Feather } from '@expo/vector-icons';
-import CardUser from  '../../components/cardRectangle02/Index'
+import CardUser from  '../../components/cardFriend/Index'
 
-import Routesvalues from '../../services/navigation'
+
 const friends = (props) => {
 
     const [search , setSearch] = useState('')
