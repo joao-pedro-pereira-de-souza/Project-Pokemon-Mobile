@@ -101,7 +101,7 @@ export default function signUp() {
        <View style={{width:'90%' , marginTop:10 , marginLeft:10}}>
 
          <Text style={[ stylesFonts.labelDesc , {textAlign:'left' , color: COLORS.Coloryellow , opacity:0.8}]}>
-           com o cadastro efetuado você terá vários acessos , montar lista de pokemon preferidos e ver pontos.
+           com o cadastro efetuado você terá vários acessos , montar lista de pokémon preferidos e ver pontos.
          </Text>
 
        </View>

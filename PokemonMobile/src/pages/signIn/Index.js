@@ -28,9 +28,11 @@ export default function signIn() {
 
       if(await Requisitions.SignIn(email , senha)){
 
-       setNotification(true)
-       setStatus(true)
-       setTextNotification('Login efetuado com sucesso')
+        setNotification(true)
+        setStatus(true)
+        setTextNotification('Login efetuado com sucesso')
+
+        Navigation.navigate('Home')
         
       }
       else{

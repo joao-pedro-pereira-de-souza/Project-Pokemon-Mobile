@@ -20,9 +20,10 @@ const routes = () =>{
 
             <Stack.Navigator headerMode={false} 
             >
-                <Stack.Screen name='Home' component={DrawerScreensHome} />
+               
                 <Stack.Screen name='SignIn' component={SignIn}/>
                 <Stack.Screen name='SignUp' component={SignUp} />
+                <Stack.Screen name='Home' component={DrawerScreensHome} />
               
             </Stack.Navigator>
 
