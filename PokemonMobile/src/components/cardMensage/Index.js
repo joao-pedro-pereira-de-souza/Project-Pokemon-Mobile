@@ -2,12 +2,11 @@ import React from 'react';
 import { View , Image , TouchableOpacity , Text} from 'react-native';
 import styles from './Styles';
 import {WidthScreen , stylesFonts} from '../../Styles';
-import {ScrollView} from 'react-native-gesture-handler'
-import { FontAwesome } from '@expo/vector-icons';
 
+import RoutesValue from '../../services/navigation'
 const cardMensage = (props) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => RoutesValue.routes.navigate('Chat')}>
 
          <Image  source={props.img} style={styles.img} />
 
@@ -23,8 +22,6 @@ const cardMensage = (props) => {
 
               </View>
             
-
-        
           </View>
 
           <View style={{alignItems:'center' , position:'absolute' , top:8 , right:8}}>

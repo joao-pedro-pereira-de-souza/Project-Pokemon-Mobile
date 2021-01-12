@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
         marginLeft: WidthScreen *0.02 , 
 
         marginTop: WidthScreen * 0.02
-       
         
     } ,
 

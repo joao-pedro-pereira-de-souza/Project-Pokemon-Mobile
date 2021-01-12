@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import DrawerScreensHome from './DrawerHome/Index';
 import SignIn from '../pages/signIn/Index';
 import SignUp from '../pages/signUp/Index';
+import Chat from "../pages/chat/Index";
 
 
 const Stack = createStackNavigator();
@@ -19,12 +20,10 @@ const routes = () =>{
 
             <Stack.Navigator headerMode={false} 
             >
-
                 <Stack.Screen name='Home' component={DrawerScreensHome} />
                 <Stack.Screen name='SignIn' component={SignIn}/>
                 <Stack.Screen name='SignUp' component={SignUp} />
-               
-
+              
             </Stack.Navigator>
 
         </NavigationContainer>

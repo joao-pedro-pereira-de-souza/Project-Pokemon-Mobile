@@ -48,13 +48,13 @@ const chat = (props) => {
 
                       <View style={{marginVertical:5}}>
 
-                      <CardUser name='João' img={imgPerfil} pokemons={5}/>
+                      <CardUser name='Thiago' img={imgPerfil} pokemons={5}/>
 
                       </View>
 
                       <View style={{marginVertical:5}}>
 
-                      <CardUser name='João' img={imgPerfil} pokemons={5}/>
+                      <CardUser name='Elena' img={imgPerfil} pokemons={5}/>
 
                       </View>
 

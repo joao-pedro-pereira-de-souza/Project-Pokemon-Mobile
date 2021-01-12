@@ -9,7 +9,7 @@ import ScreenDetails from '../../pages/details/Index';
 import ScreenFriends from '../../pages/friends/Index';
 import ScreenchatHome from '../../pages/chatHome/Index';
 import { COLORS } from '../../Styles';
-
+import ScreenChat from '../../pages/chat/Index'
 
 const Stack = createStackNavigator()
 
@@ -47,6 +47,7 @@ const routes = ({style}) => {
                 <Stack.Screen name='Details' component={ScreenDetails} />
                 <Stack.Screen name='Friends' component={ScreenFriends} />
                 <Stack.Screen name='ChatHome' component={ScreenchatHome} />
+                <Stack.Screen name='Chat' component={ScreenChat} />
                 
             </Stack.Navigator>
 
