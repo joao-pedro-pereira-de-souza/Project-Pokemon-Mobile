@@ -11,6 +11,8 @@ import RoutesTopBar from './TopBar';
 import RoutesValue from '../../services/navigation'
 export default function home(props) {
 
+ 
+
   //RoutesValue.routes.navigate('MyList' , {title:'isso'})
 
  return (
@@ -19,7 +21,7 @@ export default function home(props) {
 
      <SafeAreaView style={styles.contentTop}>
 
-       <TouchableOpacity onPress={() => RoutesValue.routes.OpenDrawer()}>
+       <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
          <Entypo name="menu" size={30} color={COLORS.Coloryellow}/>
        </TouchableOpacity>
 

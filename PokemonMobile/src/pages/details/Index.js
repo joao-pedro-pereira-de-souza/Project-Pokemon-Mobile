@@ -14,7 +14,7 @@ import RoutesValue from '../../services/navigation'
 import Animated from 'react-native-reanimated';
 
 const imgLoading = require('../../assets/GifLoading.gif')
-export default function details({route}) {
+export default function details({navigation , route}) {
 
   const [ data , setData] = useState([])
 
@@ -145,7 +145,7 @@ else{
 
          <View style={styles.headerTop}>
 
-              <TouchableOpacity onPress={() => RoutesValue.routes.OpenDrawer()}>
+              <TouchableOpacity onPress={() => navigation.openDrawer()}>
 
                   <Ionicons name="ios-menu" size={26} color="#fff" />
                 

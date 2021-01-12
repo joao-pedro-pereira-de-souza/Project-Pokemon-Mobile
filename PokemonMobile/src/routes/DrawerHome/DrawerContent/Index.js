@@ -56,6 +56,7 @@ const drawerContent = (props) =>{
             <DrawerItem
                 style={{elevation:1.5 , width:200 , borderRadius:10 }}
                 label='Amigos'
+                onPress={() =>  props.navigation.navigate('Friends')}
                 labelStyle={[ stylesFonts.labelBold ,{ color: COLORS.Coloryellow , marginLeft:-10}]}
                 icon={() => <Feather name="users" size={24} color={COLORS.Coloryellow}/>}
                 

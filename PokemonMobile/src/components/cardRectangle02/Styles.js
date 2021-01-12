@@ -6,46 +6,40 @@ const styles = StyleSheet.create({
     container:{
        
         width: 300,
-        height: HeightScreen * 0.18,
-        
-    },
-    content:{
-        width:'88%',
-        height:'100%',
-
-        backgroundColor: COLORS.ColorBlue,
+        height: HeightScreen * 0.189,
+        backgroundColor: COLORS.Coloryellow,
         borderRadius:  HeightScreen * 0.02,
-        position:'absolute',
-        right:0,
-        flexDirection:'row',
-       
+
+        flexDirection:'row'
         
     },
+
     img:{
 
-        width:WidthScreen *0.30 , 
-        height: WidthScreen *0.30 , 
-        zIndex:1 , 
-        position:'absolute' , 
-        left:0
+        width:WidthScreen *0.18 , 
+        height: WidthScreen *0.18 , 
+        borderRadius: WidthScreen *0.18 , 
+        marginLeft: WidthScreen *0.02 , 
+
+        marginTop: WidthScreen * 0.02
+       
         
     } ,
-    
-    button:{
+
+    imgPoke:{
 
         width:WidthScreen *0.10 , 
         height: WidthScreen *0.10 , 
-        backgroundColor:'#fff',
-        borderRadius: WidthScreen *0.10 /2 ,
-        alignItems:'center',
-        justifyContent:'center',
+        borderRadius: WidthScreen *0.10 , 
+        marginLeft: WidthScreen *0.02 , 
 
-        position:'absolute',
-        top:7,
-        right:7
+        marginTop: WidthScreen * 0.02,
+        elevation:3
+       
         
-
-    }
+    } ,
+    
+   
 });
 
 export default styles

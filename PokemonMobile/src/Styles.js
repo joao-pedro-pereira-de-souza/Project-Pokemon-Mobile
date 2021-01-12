@@ -4,6 +4,8 @@ export const { width:WidthScreen , height:HeightScreen } = Dimensions.get('windo
 
 export const LOGO = require('./assets/phanpyRight.png')
 
+export const imgPerfil = require('./assets/perfil.jpg')
+
 export const COLORS = 
 {
     Background:'#3D3D3D',
