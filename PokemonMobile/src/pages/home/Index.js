@@ -1,19 +1,13 @@
-import React, {useState , useEffect} from 'react';
+import React from 'react';
 import { View  , SafeAreaView , Text , Image , TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+
 import styles from './Styles';
 
-import Input from '../../components/inputText/Index';
-import {stylesFonts , COLORS, WidthScreen} from '../../Styles';
-import { Entypo , MaterialIcons} from '@expo/vector-icons';
+import {stylesFonts , COLORS} from '../../Styles';
+import { Entypo } from '@expo/vector-icons';
 import RoutesTopBar from './TopBar';
 
-import RoutesValue from '../../services/navigation'
 export default function home(props) {
-
- 
-
-  //RoutesValue.routes.navigate('MyList' , {title:'isso'})
 
  return (
 

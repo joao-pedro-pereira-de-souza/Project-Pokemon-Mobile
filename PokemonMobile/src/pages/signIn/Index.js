@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { View  , Text , Image , TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
 import styles from './Styles';
@@ -15,6 +15,7 @@ import Requisitions from '../../services/User/requisitions';
 
 export default function signIn() {
 
+  //#region Values
   const [email , setEmail] = useState('');
   const [senha , setSenha] = useState('');
 
@@ -24,6 +25,15 @@ export default function signIn() {
 
   const Navigation = useNavigation();
 
+  //#endregion
+
+  useEffect(()=>{
+
+    setNotification(true)
+    setStatus(true)
+    setTextNotification('Por conta do limite de requisições na Api de usuários, pode parar de funcionar a Api')
+
+  }, [])
  async function RequestionSignIn(){
 
       if(await Requisitions.SignIn(email , senha)){
@@ -94,6 +104,10 @@ export default function signIn() {
         </View>
 
         <Button text='Logar' onPress={() => RequestionSignIn}/>
+
+        <TouchableOpacity onPress={()=>   Navigation.navigate('Home')} style={{alignSelf:'center'}}>
+          <Text style={[stylesFonts.labelDesc , {opacity:0.8}]}>Entrar sem login</Text>
+        </TouchableOpacity>
      
      </View>
 

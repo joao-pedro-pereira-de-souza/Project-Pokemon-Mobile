@@ -10,6 +10,7 @@ import CardRectangle from '../../components/cardRectangle/Index'
 import Options from '../../components/headerOptions/Index'
 import Input from '../../components/inputText/Index';
 
+
 const Stack = createStackNavigator();
 
 const imgLoading = require('../../assets/GifLoading.gif')

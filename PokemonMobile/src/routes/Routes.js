@@ -6,11 +6,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import DrawerScreensHome from './DrawerHome/Index';
 import SignIn from '../pages/signIn/Index';
 import SignUp from '../pages/signUp/Index';
-import Chat from "../pages/chat/Index";
-
 
 const Stack = createStackNavigator();
-
 
 const routes = () =>{
  

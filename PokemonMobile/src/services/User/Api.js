@@ -1,6 +1,5 @@
 let url = 'https://api.sheety.co/0a8d8b30bb4734602aaab4d7489ad3a3/login/página1';
 let urlMy = 'https://api.sheety.co/0a8d8b30bb4734602aaab4d7489ad3a3/login/listaPokemon'
-export const DadosUser = {id:1 , name:'João Pedro' , email:'Jppereiradesouza29@gmail.com'}
 
 export const GetUsers = () =>{
 
@@ -19,6 +18,7 @@ export const GetUsers = () =>{
     })
 
 }
+
 
 export const PostSignUp = (JsonItens) =>{
 
