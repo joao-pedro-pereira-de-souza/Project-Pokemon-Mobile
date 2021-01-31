@@ -1,15 +1,14 @@
-let url = 'https://api.sheety.co/0a8d8b30bb4734602aaab4d7489ad3a3/login/página1';
-let urlMy = 'https://api.sheety.co/0a8d8b30bb4734602aaab4d7489ad3a3/login/listaPokemon'
+let urlBase = "http://apipokebook.herokuapp.com"
 
 export const GetUsers = () =>{
 
     return new Promise((res , req) => {
 
-        fetch(url)
+        fetch(urlBase + "/user/list/")
         .then( response => response.json())
         .then(response  =>{
 
-            res(response.página1)
+            res(response)
 
         }).catch(err =>{
             req("ocorreu um erro")
@@ -19,18 +18,15 @@ export const GetUsers = () =>{
 
 }
 
-
-export const PostSignUp = (JsonItens) =>{
+export const SignUp = (name , email , password) =>{
 
     return new Promise((res , req) => {
 
         let body = {
 
-            página1:{
-    
-              ...JsonItens
-    
-            }
+            "name":name,
+            "email":email,
+           "password":password
     
         }
 
@@ -56,15 +52,13 @@ export const PostSignUp = (JsonItens) =>{
         })
 
     })
-   
-
 
 }
 
-export const GetMyList = () =>{
+export const GetMyList = (id) =>{
     return new Promise((resolve, reject) => {
 
-        fetch(urlMy)
+        fetch(urlBase + '/myList/user/' + id)
         .then(response => response.json())
         .then(response => {
             resolve(response)
@@ -77,12 +71,28 @@ export const GetMyList = () =>{
     
 }
 
-export const DeleteItem = () =>{
+export const SignIn = (email , password) =>{
 
 return new Promise((resolve, reject) => {
 
-    
-  
+    fetch(urlBase +'/user/signIn',{
+
+        method:'POST',
+        headers:{
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({email , password})
+
+    }).then(response => response.json()).then(data =>{
+
+        console.log(data)
+        resolve(data)
+
+    }).catch(error =>{
+        reject(error)
+    })
+
 })
 
 

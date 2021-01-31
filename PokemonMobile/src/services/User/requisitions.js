@@ -1,78 +1,56 @@
-import { GetUsers , PostSignUp , GetMyList }from './Api'
+import { SignIn , SignUp }from './Api'
 import ValuesStatic from './valuesStatic'
 
 export default {
 
-    SignIn: async (name , password) =>{
+    SignIn: async (email , password) =>{
 
-        const Liste = await GetUsers();
+        return new Promise((resolve, reject) => {
 
-        return new Promise((rest , req) =>{
+            SignIn(email , password ).then(
 
-            try{
-
-                let boolUser = false
-
-                Liste.forEach(element => {
+                data =>{
     
-                   if(element.name == name){
+                    if(data.error){
     
-                        if(element.senha = password){
+                        reject(data.message)
     
-                            boolUser = true;
+                    }
+                    ValuesStatic.Token = data.token;
+                    ValuesStatic.DadosUser = data;
+                    resolve()
     
-                        }      
-                    
-                   }
-      
-                });
+            }).catch(dataErro => {
     
-               rest(boolUser)  
-            }
-
-            catch{
-               console.log('Erro no sistema')
-            }
- 
+                reject(dataErro)
+    
+            })
+          
         })
+        
+        
+
     },
 
-    SignUp : async (Array)=>
+    SignUp : async (name , email , password )=>
     {
 
-        return new Promise((res , req) =>{
+       await SignUp(name ,email , password).then(data =>{
 
-            PostSignUp(Array).then(response =>{
+            ValuesStatic.Token = data.token;
+            ValuesStatic.DadosUser = data;
 
-                res(response)
+       }).catch(DataErro =>{
 
-            }).catch(err =>{
-                req(err)
-            })
+        return DataErro
 
-        })
+       })
 
     },
 
     RefreshMyList: async () =>{
 
-        GetMyList().then(content =>{
-    
-            content.listaPokemon.map(user =>{
-    
-                if(user.id == ValuesStatic.DadosUser.login.id){
-    
-                    let array = user.pokemons.split(',')
-    
-                    ValuesStatic.DadosUser.listPokemons.pokemons = array
-    
-                }
-        
-            })
-        
-    
-        })
-
+     
     }
       
 

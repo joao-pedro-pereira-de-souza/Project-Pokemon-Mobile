@@ -12,6 +12,7 @@ import Notification from '../../components/NotificationsModel/Index'
 import { EvilIcons  , FontAwesome , MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Requisitions from '../../services/User/requisitions';
+import ValuesStatic from '../../services/User/valuesStatic'
 
 export default function signIn() {
 
@@ -27,32 +28,25 @@ export default function signIn() {
 
   //#endregion
 
-  useEffect(()=>{
+ async function RequestionSignIn(){
+
+  await Requisitions.SignIn(email , senha).then(() =>{
 
     setNotification(true)
     setStatus(true)
-    setTextNotification('Por conta do limite de requisições na Api de usuários, pode parar de funcionar a Api')
+    setTextNotification('Login efetuado com sucesso')
 
-  }, [])
- async function RequestionSignIn(){
+    Navigation.navigate('Home')
 
-      if(await Requisitions.SignIn(email , senha)){
+  }).catch(error => {
 
-        setNotification(true)
-        setStatus(true)
-        setTextNotification('Login efetuado com sucesso')
+    setNotification(true)
+    setStatus(false)
+    setTextNotification('Erro no login\n' + error)
 
-        Navigation.navigate('Home')
-        
-      }
-      else{
+  })
 
-        setNotification(true)
-        setStatus(false)
-        setTextNotification('Erro no login')
-
-      }
-  
+    
   }
 
  return (
