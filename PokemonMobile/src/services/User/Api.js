@@ -1,5 +1,7 @@
 let urlBase = "http://apipokebook.herokuapp.com"
 
+// https://stackoverflow.com/questions/30203044/using-an-authorization-header-with-fetch-in-react-native
+
 export const GetUsers = () =>{
 
     return new Promise((res , req) => {
@@ -24,9 +26,9 @@ export const SignUp = (name , email , password) =>{
 
         let body = {
 
-            "name":name,
-            "email":email,
-           "password":password
+            name,
+            email,
+            password
     
         }
 
@@ -86,7 +88,6 @@ return new Promise((resolve, reject) => {
 
     }).then(response => response.json()).then(data =>{
 
-        console.log(data)
         resolve(data)
 
     }).catch(error =>{

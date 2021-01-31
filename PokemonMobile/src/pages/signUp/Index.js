@@ -10,6 +10,7 @@ import Input from '../../components/inputText/Index';
 import Button from '../../components/button/Index';
 import ButtonClcle from '../../components/buttonCicleIcon/Index';
 import Notification from '../../components/NotificationsModel/Index';
+import LoadingModel from '../../components/LoadingModel/Index';
 
 import Requestions from '../../services/User/requisitions'
 import RequestionsSystem from '../../services/Requestions'
@@ -22,6 +23,7 @@ export default function signUp() {
   const [ConfSenha , setConfSenha] = useState('');
 
   const [notification , setNotification ] = useState(false);
+  const [ loadign , setLoading] = useState(false)
   const [status , setStatus] = useState(false);
   const [textNotification , setTextNotification ] = useState('');
 
@@ -35,25 +37,27 @@ export default function signUp() {
       if(senha == ConfSenha)
       {
 
-          let ArraySignUp = { name:name , email: email , senha: senha}
+        setLoading(true)
 
-          await Requestions.SignUp(ArraySignUp).then
+          await Requestions.SignUp( name , email , senha).then
           ( 
 
               () => 
               {
-
+                setLoading(false)
                 setNotification(true)
                 setStatus(true)
-                setTextNotification('Login efetuado com sucesso')
+                setTextNotification('Cadastro efetuado com sucesso')
+
+                Navigation.navigate('Home')
               
               },
 
-              ()=>{
-
+              (data)=>{
+                setLoading(false)
                 setNotification(true)
                 setStatus(false)
-                setTextNotification('Ocorreu um erro no cadastro \n tente novamente')
+                setTextNotification('Ocorreu um erro no cadastro: \n' + data)
 
               }
             
@@ -209,6 +213,8 @@ export default function signUp() {
         Status={status}
         
         />
+
+        <LoadingModel visible={loadign} />
 
 
    </View>

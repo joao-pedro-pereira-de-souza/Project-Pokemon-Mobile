@@ -8,6 +8,8 @@ import {stylesFonts , COLORS , HeightScreen} from '../../Styles';
 import ImgErro from '../../assets/IconErro.png';
 import ImgOk from '../../assets/IconOk.png';
 
+const imgLoading = require('../../assets/GifLoading.gif')
+
 const NotificationsModel = (props) => {
 
     const DesativeNoti = () =>{
@@ -18,23 +20,40 @@ const NotificationsModel = (props) => {
 
   return (
 
+
      <Modal animationType='slide' visible={props.visible || false} transparent={true} animationIn='zoomIn'>
 
-         <View style={styles.container}>
+               { props.isLoading ? 
+                    (
+                        <View style={[styles.container , { justifyContent:'center' }]}>
+               
+                             <Image source={imgLoading} style={{width:'90%'}} resizeMode='contain'/>
+            
+                        </View>
+                 
+                    ):
 
-         <Image source={props.Status ? ImgOk : ImgErro} style={{width:'50%' , height:'50%', alignSelf:'center' , marginTop:30}} resizeMode='contain' />
+                    (
 
-            <Text style={[ stylesFonts.labelDescBold , styles.labelDescConf]}>
-                {props.text}
-            </Text>
+                        <View style={styles.container}>
 
-            <TouchableOpacity style={styles.button} onPress={DesativeNoti}>
+                                <Image source={props.Status ? ImgOk : ImgErro} style={{width:'50%' , height:'50%', alignSelf:'center' , marginTop:30}} resizeMode='contain' />
 
-                <Text style={[stylesFonts.labelBold , { color:'#fff'} ]}>Ok</Text>
+                                <Text style={[ stylesFonts.labelDescBold , styles.labelDescConf]}>
+                                    {props.text}
+                                </Text>
 
-            </TouchableOpacity>
+                                <TouchableOpacity style={styles.button} onPress={DesativeNoti}>
 
-         </View>
+                                    <Text style={[stylesFonts.labelBold , { color:'#fff'} ]}>Ok</Text>
+
+                                </TouchableOpacity>
+
+                        </View>
+
+                    )
+               }   
+        
         
      </Modal>
   

@@ -35,17 +35,30 @@ export default {
     SignUp : async (name , email , password )=>
     {
 
-       await SignUp(name ,email , password).then(data =>{
+        return new Promise((resolve, reject) => {
 
-            ValuesStatic.Token = data.token;
-            ValuesStatic.DadosUser = data;
+            SignUp(name ,email , password).then(data =>{
 
-       }).catch(DataErro =>{
+                if(data.error){
 
-        return DataErro
+                    reject(data.message)
 
-       })
+                }
 
+                ValuesStatic.Token = data.token;
+                ValuesStatic.DadosUser = data;
+
+                resolve()
+    
+           }).catch(DataErro =>{
+    
+             reject(DataErro)
+    
+           })
+    
+          
+        })
+        
     },
 
     RefreshMyList: async () =>{
