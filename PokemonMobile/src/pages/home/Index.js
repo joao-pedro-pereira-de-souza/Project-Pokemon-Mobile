@@ -5,9 +5,12 @@ import styles from './Styles';
 
 import {stylesFonts , COLORS} from '../../Styles';
 import { Entypo } from '@expo/vector-icons';
+import ValuesStatic from '../../services/User/valuesStatic'
 import RoutesTopBar from './TopBar';
 
 export default function home(props) {
+
+  console.log(ValuesStatic.DadosUser)
 
  return (
 

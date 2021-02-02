@@ -1,4 +1,4 @@
-import { SignIn , SignUp }from './Api'
+import { SignIn , SignUp , GetMyList}from './Api'
 import ValuesStatic from './valuesStatic'
 
 export default {
@@ -12,8 +12,8 @@ export default {
                 data =>{
     
                     if(data.error){
-    
-                        reject(data.message)
+                        
+                        reject(data.error)
     
                     }
                     ValuesStatic.Token = data.token;
@@ -27,8 +27,6 @@ export default {
             })
           
         })
-        
-        
 
     },
 
@@ -41,7 +39,7 @@ export default {
 
                 if(data.error){
 
-                    reject(data.message)
+                    reject(data.error)
 
                 }
 
@@ -61,10 +59,30 @@ export default {
         
     },
 
-    RefreshMyList: async () =>{
+    RefreshMyList: async (id) =>{
+
+        return new Promise((resolve, reject) => {
+            GetMyList(id).then(data =>{
+
+                if(data.error){
+
+                    reject(data.error)
+
+                }
+
+                resolve(data)
+    
+           }).catch(DataErro =>{
+    
+             reject(DataErro)
+    
+           })
+    
+        })
+        
 
      
-    }
-      
+    },
+  
 
 }

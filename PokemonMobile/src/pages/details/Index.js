@@ -11,7 +11,7 @@ import * as Animatable from 'react-native-animatable';
 import Requestion from '../../services/Pokemon/requisitions';
 import ProgressBar from '../../components/progressBar/Index';
 import RoutesValue from '../../services/navigation'
-import Animated from 'react-native-reanimated';
+
 
 const imgLoading = require('../../assets/GifLoading.gif')
 export default function details({navigation , route}) {
@@ -66,6 +66,7 @@ export default function details({navigation , route}) {
 
   const ModifIsHeart = () =>{
     setIsHeart(heart => !heart);
+
   }
 
   const verificationPorceLimit = (value) =>{

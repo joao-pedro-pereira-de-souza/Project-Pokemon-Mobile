@@ -1,6 +1,7 @@
 let urlBase = "http://apipokebook.herokuapp.com"
+import ValuesStatic from './valuesStatic'
 
-// https://stackoverflow.com/questions/30203044/using-an-authorization-header-with-fetch-in-react-native
+// User_Token: https://stackoverflow.com/questions/30203044/using-an-authorization-header-with-fetch-in-react-native
 
 export const GetUsers = () =>{
 
@@ -22,55 +23,30 @@ export const GetUsers = () =>{
 
 export const SignUp = (name , email , password) =>{
 
-    return new Promise((res , req) => {
+    return new Promise((resolve, reject) => {
 
-        let body = {
-
-            name,
-            email,
-            password
-    
-        }
-
-        fetch(url, {
+        fetch(urlBase + '/user/register', {
     
             method:'POST',
             headers:{
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             }, 
-            body: JSON.stringify(body)
+            body: JSON.stringify({name , email , password})
     
         })
         .then((response)=> response.json())
-        .then(response => {
-
-            res(response.página1)
+        .then(data => {
+            resolve(data)
     
         }).catch(err =>{
 
-            req(err)
-    
-        })
-
-    })
-
-}
-
-export const GetMyList = (id) =>{
-    return new Promise((resolve, reject) => {
-
-        fetch(urlBase + '/myList/user/' + id)
-        .then(response => response.json())
-        .then(response => {
-            resolve(response)
-        }).catch(err =>{
-            
             reject(err)
-        })
-      
-    })
     
+        })
+
+    })
+
 }
 
 export const SignIn = (email , password) =>{
@@ -96,5 +72,33 @@ return new Promise((resolve, reject) => {
 
 })
 
+
+}
+
+export const GetMyList = (id) => {
+
+    return new Promise((resolve, reject) => {
+
+        fetch(urlBase + '/myList/user/' + id, {
+
+            method:'GET',
+            headers:{
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + ValuesStatic.Token,
+            },
+
+        }).then(response => response.json()).then(data => {
+
+            resolve(data)
+
+        }).catch((err) =>{
+
+            reject(err)
+
+        })
+      
+    })
+    
 
 }

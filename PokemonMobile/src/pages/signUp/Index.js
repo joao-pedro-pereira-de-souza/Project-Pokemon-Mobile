@@ -10,7 +10,7 @@ import Input from '../../components/inputText/Index';
 import Button from '../../components/button/Index';
 import ButtonClcle from '../../components/buttonCicleIcon/Index';
 import Notification from '../../components/NotificationsModel/Index';
-import LoadingModel from '../../components/LoadingModel/Index';
+
 
 import Requestions from '../../services/User/requisitions'
 import RequestionsSystem from '../../services/Requestions'
@@ -31,37 +31,32 @@ export default function signUp() {
 
   async function SignUpPOST (){
 
+
     if(!RequestionsSystem.TextNull([name , email , senha , ConfSenha]))
     {
 
       if(senha == ConfSenha)
       {
-
+       
+        setNotification(true)
         setLoading(true)
 
-          await Requestions.SignUp( name , email , senha).then
-          ( 
+        await Requestions.SignUp(name ,email , senha).then(() =>{
 
-              () => 
-              {
-                setLoading(false)
-                setNotification(true)
-                setStatus(true)
-                setTextNotification('Cadastro efetuado com sucesso')
+          setLoading(false)
+          setStatus(true)
+          setTextNotification('Cadastro efetuado com sucesso')
 
-                Navigation.navigate('Home')
-              
-              },
+          Navigation.navigate('Home')
 
-              (data)=>{
-                setLoading(false)
-                setNotification(true)
-                setStatus(false)
-                setTextNotification('Ocorreu um erro no cadastro: \n' + data)
+        }).catch(error => {
+          setLoading(false)
+          setStatus(false)
+          setTextNotification('Erro no login\n' + error)
 
-              }
-            
-            )
+        })
+          
+
       }
       else
       {
@@ -211,12 +206,10 @@ export default function signUp() {
         visible={notification}
         getNotification={setNotification}
         Status={status}
-        
+        isLoading={loadign}
         />
 
-        <LoadingModel visible={loadign} />
-
-
+        
    </View>
   );
 }

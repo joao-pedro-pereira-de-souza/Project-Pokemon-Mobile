@@ -8,13 +8,16 @@ import {COLORS , stylesFonts} from '../../Styles';
 import {useNavigation} from '@react-navigation/native'
 import Options from '../../components/headerOptions/Index';
 import CardPokemon from '../../components/cardRectangle/Index';
-
+import RequestionUser from '../../services/User/requisitions'
 import ValuesStatic from '../../services/User/valuesStatic'
 
 import Api from '../../services/Pokemon/Api'
+
 const MyList = () => {
 
+  const [isItemList , setIsIttemLisy] = useState(false);
   const [data , setData] = useState([]);
+  const [dataMy , setDataMy] = useState([])
   const Navigation = useNavigation();
 
   //#region  Api 
@@ -24,10 +27,19 @@ useEffect(()=>{
   async function GetList (){
 
     // Para não consumir muita requisições na Api de usuários (no pacote gratuito pode ser feito 200 requisições por mês )
+   const data = await RequestionUser.RefreshMyList(ValuesStatic.DadosUser.user._id)
 
-    //await RequestionUser.RefreshMyList()
+   setDataMy(data)
+
+   if(dataMy.pokemonsHeart != null){
 
     await LoadingPokemon(ValuesStatic.DadosUser.listPokemons.pokemons)
+
+   }else{
+
+   }
+
+    //
   
   }
 
@@ -88,19 +100,30 @@ useEffect(()=>{
 
         <Options/>
 
-        <FlatList
+        {isItemList?
+            (
+              <FlatList
 
-          showsVerticalScrollIndicator={false}
-          style={{alignSelf:'center'}}
-          data={data}
-          renderItem={RederItens}
-          keyExtractor={(item , index) => String(index)}
-          numColumns={2}
-        />
+              showsVerticalScrollIndicator={false}
+              style={{alignSelf:'center'}}
+              data={data}
+              renderItem={RederItens}
+              keyExtractor={(item , index) => String(index)}
+              numColumns={2}
+              />
+                      
+            ):
+            (
 
-    </View>
+              <Text style={[stylesFonts.labelDescBold ,{color: COLORS.Coloryellow , textAlign:'center' , marginTop:10}]}>Sem Pokémons</Text>
+
+            )
+          
+        }
+
+      
   
-  
+  </View>
     );
 
 }
