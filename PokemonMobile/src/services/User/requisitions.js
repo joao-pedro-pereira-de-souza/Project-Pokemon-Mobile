@@ -1,4 +1,4 @@
-import { SignIn , SignUp , GetMyList}from './Api'
+import { SignIn , SignUp , GetMyList , InsertItemMyList , DeleteItemMyList}from './Api'
 import ValuesStatic from './valuesStatic'
 
 export default {
@@ -62,6 +62,7 @@ export default {
     RefreshMyList: async (id) =>{
 
         return new Promise((resolve, reject) => {
+
             GetMyList(id).then(data =>{
 
                 if(data.error){
@@ -79,10 +80,69 @@ export default {
            })
     
         })
-        
-
      
     },
-  
 
+    insertItemListUser: async (itemUpdate) =>{
+
+        return new Promise((resolve, reject) => {
+
+            InsertItemMyList(itemUpdate , ValuesStatic.DadosUser.user._id).then(data => {
+
+                    if(data.error){
+                        reject(data.error)
+                    }
+
+                    resolve(data)
+
+            }).catch(err =>{
+
+                reject(err)
+
+            })
+
+        })
+        
+    },
+
+    DeleteItemListUser: async (itemDelete) =>{
+
+        return new Promise((resolve, reject) => {
+
+            DeleteItemMyList(itemDelete , ValuesStatic.DadosUser.user._id).then(() =>{
+                resolve()
+            }).catch(() =>{reject()})
+          
+        })
+        
+
+    },
+
+    verificationIsPokemon: async (value) =>{
+        
+        return new Promise((resolve, reject) => {
+
+            GetMyList(ValuesStatic.DadosUser.user._id).then(data =>{
+
+                if(data.pokemonsHeart == null){
+                   resolve()
+                }
+    
+               data.pokemonsHeart.map(item =>{
+    
+                    if(item == value.pokemonsHeart){
+
+                        reject()
+                    }
+    
+                })
+
+                resolve()
+    
+            })
+          
+        })
+        
+    }
+      
 }

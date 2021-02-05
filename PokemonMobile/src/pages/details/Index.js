@@ -9,12 +9,16 @@ import { Ionicons , AntDesign , MaterialIcons} from '@expo/vector-icons';
 import {CategoryPokeColor} from '../../Styles'
 import * as Animatable from 'react-native-animatable';
 import Requestion from '../../services/Pokemon/requisitions';
+import RequestionUser from '../../services/User/requisitions';
 import ProgressBar from '../../components/progressBar/Index';
 import RoutesValue from '../../services/navigation'
 
-
+import Notification from '../../components/NotificationsModel/Index'
 const imgLoading = require('../../assets/GifLoading.gif')
+
 export default function details({navigation , route}) {
+
+  const idPokemon = route.params.id;
 
   const [ data , setData] = useState([])
 
@@ -24,9 +28,32 @@ export default function details({navigation , route}) {
 
   const [loading , setLoading] = useState(true)
 
+  //#region values notification
+
+  const [ notification , setNotification ] = useState(false);
+  const [ loadignNot , setLoadingNot] = useState(false)
+  const [ status , setStatus] = useState(false);
+  const [ textNotification , setTextNotification ] = useState('');
+
+  //#endregion
+
   useEffect(() =>{
 
     async function GetData(){
+
+      // Verification Heart pokemon
+
+      await RequestionUser.verificationIsPokemon({ pokemonsHeart: String(idPokemon) }).then(() =>{ // Caso o não tenha resultado
+      
+        setIsHeart(false)
+  
+       }).catch(() =>{
+  // Caso tenha resultado
+        setIsHeart(true)
+  
+       })
+
+       //
 
       await LoadingPokemon([route.params.id])
 
@@ -64,8 +91,45 @@ export default function details({navigation , route}) {
 
   }
 
-  const ModifIsHeart = () =>{
+  const ModifIsHeart = async () =>{
+
     setIsHeart(heart => !heart);
+
+    setNotification(true)
+    setLoadingNot(true)
+
+    if(isHeart == false){
+
+     await RequestionUser.verificationIsPokemon({ pokemonsHeart: String(idPokemon) }).then(() =>{
+      
+      RequestionUser.insertItemListUser({ pokemonsHeart: String(idPokemon) })
+
+      setLoadingNot(false)
+      setStatus(true)
+      setTextNotification('Novo pokemon adicionado na lista')
+
+     }).catch(() =>{
+
+      setNotification(false)
+      setLoadingNot(false)
+  
+
+     })
+     
+    }
+    else{
+  
+     await RequestionUser.verificationIsPokemon({ pokemonsHeart: String(idPokemon) }).catch(() =>{
+
+      RequestionUser.DeleteItemListUser({ pokemonsHeart: String(idPokemon)})
+
+      setLoadingNot(false)
+      setStatus(true)
+      setTextNotification('Pokemon Retirado')
+  
+     })
+     
+    }
 
   }
 
@@ -111,14 +175,6 @@ export default function details({navigation , route}) {
 
   }
 
-  const RemoveBrText = () =>{
-
-    let text = dataDescription['flavor_text_entries'][0]['flavor_text'].trim();
-
-  
-  return text
-
-  }
 
 if(loading){
 
@@ -129,10 +185,8 @@ if(loading){
         <Image source={ imgLoading } style={{width:300 , height:300}}/>
 
       </View>
-
   
     )
-
 }
 
 else{
@@ -163,7 +217,7 @@ else{
 
          <Animatable.View animation='slideInDown' style={{zIndex:1}} duration={500}>
 
-          <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + route.params.id+ '.png'}} 
+          <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + idPokemon + '.png'}} 
             style={ styles.img }/>
 
          </Animatable.View>
@@ -195,7 +249,7 @@ else{
 
             <ScrollView showsVerticalScrollIndicator={false}>
 
-                      <Text style={[stylesFonts.labelDesc , {width:'100%' , marginHorizontal:20 , opacity:0.8 }]}>{RemoveBrText()}</Text>
+                      <Text style={[stylesFonts.labelDesc , {width:'100%' , marginHorizontal:20 , opacity:0.8 }]}>{dataDescription['flavor_text_entries'][0]['flavor_text']}</Text>
 
                       <ScrollView style={{marginVertical:8 , marginLeft:WidthScreen * 0.064}} horizontal showsHorizontalScrollIndicator={false}>
 
@@ -212,7 +266,6 @@ else{
                             )
 
                           }) 
-                      
                       
                       }
 
@@ -253,7 +306,7 @@ else{
 
                                   <View style={{borderLeftWidth: 3, borderBottomWidth:3 ,borderColor: Requestion.ColorType( data[0]['types'][0]['type']['name'] ) }}>
 
-                                      <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + route.params.id+ '.png'}} 
+                                      <Image source={{uri : 'https://pokeres.bastionbot.org/images/pokemon/' + idPokemon+ '.png'}} 
                                             style={ {width:WidthScreen * 0.40, height:WidthScreen * 0.40 }}/>
 
                                   </View>
@@ -264,14 +317,23 @@ else{
 
                       </View>
 
-
              </ScrollView>
 
-
          </Animatable.View>
-
        
        </View>
+
+       <Notification
+
+        img={require('../../assets/IconOk.png')}
+        text={textNotification}
+        visible={notification}
+        getNotification={setNotification}
+        Status={status}
+        isLoading={loadignNot}
+
+        />
+
  
     </View>
    );

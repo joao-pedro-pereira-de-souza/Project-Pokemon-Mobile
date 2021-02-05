@@ -58,13 +58,13 @@ const ListeTodos = () =>{
     
     }
 
-    const RederItem = (pokemon) =>
+    const RederItem = (pokemon , index) =>
     {
 
 
         return(
 
-            <View style={{margin: 5}}>
+            <View key={index} style={{margin: 5}}>
 
                 <CardRectangle pokemon={pokemon.item} />
 

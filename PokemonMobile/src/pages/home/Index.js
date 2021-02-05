@@ -10,8 +10,6 @@ import RoutesTopBar from './TopBar';
 
 export default function home(props) {
 
-  console.log(ValuesStatic.DadosUser)
-
  return (
 
    <View style={styles.container}>

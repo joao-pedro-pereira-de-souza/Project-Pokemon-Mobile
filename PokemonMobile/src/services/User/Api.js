@@ -98,6 +98,60 @@ export const GetMyList = (id) => {
 
         })
       
+    })  
+
+}
+
+export const InsertItemMyList = (itemUpdate , id) =>{
+
+    return new Promise((resolve, reject) => {
+
+        fetch(urlBase + '/myList/addItem/' + id, {
+
+            method:'PUT',
+            headers:{
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + ValuesStatic.Token,
+            },
+            body: JSON.stringify(itemUpdate)
+
+        }).then(response => response.json()).then(data => {
+
+            resolve(data)
+
+        }).catch((err) =>{
+
+            reject(err)
+
+        })
+      
+    })  
+
+}
+
+export const DeleteItemMyList = (itemDelete ,id) =>{
+
+    return new Promise((resolve, reject) => {
+      
+        fetch(urlBase + '/myList/delete/' + id , {
+
+            method:'PUT',
+            headers:{
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + ValuesStatic.Token,
+            },
+
+            body: JSON.stringify(itemDelete)
+            
+        }).then(response => response.json()).then(data =>{
+            resolve(data)
+        }).catch(err => {
+            reject(err)
+        })
+
+
     })
     
 
