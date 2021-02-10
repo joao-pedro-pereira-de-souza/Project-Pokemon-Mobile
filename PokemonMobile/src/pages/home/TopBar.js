@@ -5,22 +5,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Api from '../../services/Pokemon/Api';
 
 import {COLORS , WidthScreen , stylesFonts} from '../../Styles';
-
+import _ from  'lodash'
 import CardRectangle from '../../components/cardRectangle/Index'
 import Options from '../../components/headerOptions/Index'
 import Input from '../../components/inputText/Index';
 
-
 const Stack = createStackNavigator();
 
 const imgLoading = require('../../assets/GifLoading.gif')
-
 const ListeTodos = () =>{
 
     const [seach , setSeach] = useState('');
     //#region Configs List Api PokéApi
 
     const [data , setData] = useState([])
+    const [fullData , setFullData] = useState([])
 
     const [loading , setLoading] = useState(true)
 
@@ -37,6 +36,7 @@ const ListeTodos = () =>{
         }
 
         fetchData();
+
 
     }, [])
 
@@ -55,6 +55,7 @@ const ListeTodos = () =>{
           );
     
           setData(_pokemonData)
+          setFullData(_pokemonData)
     
     }
 
@@ -78,15 +79,26 @@ const ListeTodos = () =>{
 
     const SystemSearch = (text) =>{
 
+        setLoading(true)
+
+        const formatteQuery = text.toLowerCase()
+
+        const data = _.filter(fullData , data =>{
+    
+          if(data.name.includes(formatteQuery)){
+            return true
+          }
+    
+          return false
+
+        })
+    
+       setData(data)
        setSeach(text)
-
-       let backData = data;
-
-       let result = backData.filter(i => i.item.name.includes(text))
-
-       setData(result)
+       setLoading(false)
 
     }
+
     return(
 
         <View style={{flex:1 , backgroundColor: COLORS.Background }}>
@@ -103,8 +115,6 @@ const ListeTodos = () =>{
                 />
 
             </View>
-
-               
 
             <Options/>
 

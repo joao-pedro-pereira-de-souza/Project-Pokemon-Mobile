@@ -5,7 +5,7 @@ import {stylesFonts , COLORS , WidthScreen} from '../../Styles';
 import Requestion from '../../services/Pokemon/requisitions'
 import  RoutesValue from '../../services/navigation'
 
-const cardRectangle = ({pokemon }) => {
+const cardRectangle = ({pokemon}) => {
 
     const sizeLabel = WidthScreen * 0.044;
 

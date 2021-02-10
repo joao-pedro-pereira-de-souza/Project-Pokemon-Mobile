@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from 'react';
-import { View , SafeAreaView , TouchableOpacity , Text , FlatList} from 'react-native';
+import { View , SafeAreaView , TouchableOpacity , Text , FlatList , Image} from 'react-native';
 
 import { Entypo , MaterialIcons} from '@expo/vector-icons';
 import styles from './Styles';
@@ -12,12 +12,15 @@ import RequestionUser from '../../services/User/requisitions'
 import ValuesStatic from '../../services/User/valuesStatic'
 
 import Api from '../../services/Pokemon/Api'
+const imgLoading = require('../../assets/GifLoading.gif')
+
 
 const MyList = () => {
 
-  const [isItemList , setIsIttemLisy] = useState(false);
+  const [isItemList , setIsIttemList] = useState(false);
   const [data , setData] = useState([]);
   const [dataMy , setDataMy] = useState([])
+  const [loading , setLoading] = useState(true)
   const Navigation = useNavigation();
 
   //#region  Api 
@@ -31,19 +34,25 @@ useEffect(()=>{
 
    setDataMy(data)
 
-   if(dataMy.pokemonsHeart != null){
+    if(dataMy.pokemonsHeart != null){
 
-    await LoadingPokemon(ValuesStatic.DadosUser.listPokemons.pokemons)
+      await LoadingPokemon(dataMy.pokemonsHeart)
 
-   }else{
+      setIsIttemList(true)
+    }
+    else{
 
-   }
+      setIsIttemList(false)
 
+    }
     //
-  
+
+    setLoading(false)
+
   }
 
   GetList()
+
 
 } , [])
 
@@ -83,48 +92,64 @@ useEffect(()=>{
 
   //#endregion
 
-  return (
+  if(loading){
 
-    <View style={styles.container}>
-
-          
-        <SafeAreaView style={styles.contentTop}>
-
-          <TouchableOpacity onPress={() => Navigation.openDrawer()}>
-            <Entypo name="menu" size={30} color={COLORS.Coloryellow}/>
-          </TouchableOpacity>
-
-        </SafeAreaView>
-
-        <Text style={[stylesFonts.title , { color:COLORS.Coloryellow , alignSelf:'center' }]}>Minha lista</Text>
-
-        <Options/>
-
-        {isItemList?
-            (
-              <FlatList
-
-              showsVerticalScrollIndicator={false}
-              style={{alignSelf:'center'}}
-              data={data}
-              renderItem={RederItens}
-              keyExtractor={(item , index) => String(index)}
-              numColumns={2}
-              />
-                      
-            ):
-            (
-
-              <Text style={[stylesFonts.labelDescBold ,{color: COLORS.Coloryellow , textAlign:'center' , marginTop:10}]}>Sem Pokémons</Text>
-
-            )
-          
-        }
-
-      
+    return (
   
-  </View>
-    );
+        <View style={{flex:1 , backgroundColor: COLORS.Background , alignItems:'center' , justifyContent:'center'}}>
+  
+          <Image source={ imgLoading } style={{width:300 , height:300}}/>
+  
+        </View>
+    
+      )
+  }
+
+  else{
+
+    return (
+
+      <View style={styles.container}>
+  
+            
+          <SafeAreaView style={styles.contentTop}>
+  
+            <TouchableOpacity onPress={() => Navigation.openDrawer()}>
+              <Entypo name="menu" size={30} color={COLORS.Coloryellow}/>
+            </TouchableOpacity>
+  
+          </SafeAreaView>
+  
+          <Text style={[stylesFonts.title , { color:COLORS.Coloryellow , alignSelf:'center' }]}>Minha lista</Text>
+  
+          <Options/>
+  
+          {isItemList?
+              (
+                <FlatList
+  
+                showsVerticalScrollIndicator={false}
+                style={{alignSelf:'center'}}
+                data={data}
+                renderItem={RederItens}
+                keyExtractor={(item , index) => String(index)}
+                numColumns={2}
+                />
+                        
+              ):
+              (
+  
+                <Text style={[stylesFonts.labelDescBold ,{color: COLORS.Coloryellow , textAlign:'center' , marginTop:10}]}>Sem Pokémons</Text>
+  
+              )
+            
+          }
+  
+    </View>
+
+      );
+
+  }
 
 }
 

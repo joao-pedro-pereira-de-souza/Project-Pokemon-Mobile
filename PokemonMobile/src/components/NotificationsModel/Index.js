@@ -17,14 +17,13 @@ const NotificationsModel = (props) => {
         props.getNotification(false)
     }
 
-
   return (
-
 
      <Modal animationType='slide' visible={props.visible || false} transparent={true} animationIn='zoomIn'>
 
                { props.isLoading ? 
                     (
+
                         <View style={[styles.container , { justifyContent:'center' }]}>
                
                              <Image source={imgLoading} style={{width:'90%'}} resizeMode='contain'/>
@@ -54,9 +53,7 @@ const NotificationsModel = (props) => {
                     )
                }   
         
-        
      </Modal>
-  
   
     );
 }

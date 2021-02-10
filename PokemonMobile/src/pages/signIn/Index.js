@@ -16,6 +16,7 @@ import Requisitions from '../../services/User/requisitions';
 export default function signIn() {
 
   //#region Values
+
   const [email , setEmail] = useState('');
   const [senha , setSenha] = useState('');
 
@@ -42,19 +43,18 @@ export default function signIn() {
     Navigation.navigate('Home')
 
   }).catch(error => {
+
     setLoading(false)
     setNotification(true)
     setStatus(false)
     setTextNotification('Erro no login\n' + error)
 
   })
-
     
   }
 
  return (
 
-  
    <View style={styles.container}>
 
      <View style={styles.contentSignUp}>
@@ -159,5 +159,6 @@ export default function signIn() {
         />
 
    </View>
+   
   );
 }

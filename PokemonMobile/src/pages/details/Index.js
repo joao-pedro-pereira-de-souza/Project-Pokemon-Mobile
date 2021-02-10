@@ -11,7 +11,7 @@ import * as Animatable from 'react-native-animatable';
 import Requestion from '../../services/Pokemon/requisitions';
 import RequestionUser from '../../services/User/requisitions';
 import ProgressBar from '../../components/progressBar/Index';
-import RoutesValue from '../../services/navigation'
+import RoutesValue from '../../services/navigation';
 
 import Notification from '../../components/NotificationsModel/Index'
 const imgLoading = require('../../assets/GifLoading.gif')
@@ -20,12 +20,9 @@ export default function details({navigation , route}) {
 
   const idPokemon = route.params.id;
 
-  const [ data , setData] = useState([])
-
+  const [ data , setData ] = useState([])
   const [dataDescription , setDataDescription] = useState([])
-
   const [isHeart , setIsHeart] = useState(false)
-
   const [loading , setLoading] = useState(true)
 
   //#region values notification
@@ -61,11 +58,8 @@ export default function details({navigation , route}) {
 
       setDataDescription(details)
 
-      //console.log(dataDescription['id'])
-
       setLoading(false)
 
-      // console.log(data[0]['stats'])
     }
 
     GetData()
@@ -95,25 +89,24 @@ export default function details({navigation , route}) {
 
     setIsHeart(heart => !heart);
 
-    setNotification(true)
-    setLoadingNot(true)
+    setNotification(true);
+    setLoadingNot(true);
 
     if(isHeart == false){
 
      await RequestionUser.verificationIsPokemon({ pokemonsHeart: String(idPokemon) }).then(() =>{
       
-      RequestionUser.insertItemListUser({ pokemonsHeart: String(idPokemon) })
+      RequestionUser.insertItemListUser({ pokemonsHeart: String(idPokemon) });
 
-      setLoadingNot(false)
-      setStatus(true)
-      setTextNotification('Novo pokemon adicionado na lista')
+      setLoadingNot(false);
+      setStatus(true);
+      setTextNotification('Novo pokemon adicionado na lista');
 
      }).catch(() =>{
 
       setNotification(false)
-      setLoadingNot(false)
+      setLoadingNot(false);
   
-
      })
      
     }
@@ -333,7 +326,6 @@ else{
         isLoading={loadignNot}
 
         />
-
  
     </View>
    );

@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.Coloryellow,
         borderRadius:  HeightScreen * 0.02,
 
-        flexDirection:'row'
+        flexDirection:'row',
+        marginVertical:5
         
     },
 
@@ -35,7 +36,6 @@ const styles = StyleSheet.create({
         marginTop: WidthScreen * 0.02,
         elevation:3
        
-        
     } ,
     
    

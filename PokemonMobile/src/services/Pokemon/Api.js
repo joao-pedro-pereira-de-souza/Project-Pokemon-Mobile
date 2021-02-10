@@ -7,7 +7,7 @@ export default {
 
         return new Promise((res , req) =>{
             
-            fetch(UrlBase + '?limit=200&offset=200')
+            fetch(UrlBase + '?limit=0&offset=0')
             .then(response => response.json())
             .then(response => {
 
@@ -20,7 +20,6 @@ export default {
                 
             })
 
-            
         })
 
     },
